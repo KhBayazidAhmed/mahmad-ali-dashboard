@@ -1,5 +1,6 @@
-import Link from 'next/link'
-import { Button } from "@/components/ui/button"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ModeToggle } from "./ThemeToggler";
 
 export default function Header() {
   return (
@@ -18,9 +19,9 @@ export default function Header() {
           <Button variant="ghost" asChild>
             <Link href="/">Logout</Link>
           </Button>
+          <ModeToggle />
         </nav>
       </div>
     </header>
-  )
+  );
 }
-
