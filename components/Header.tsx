@@ -12,20 +12,28 @@ import {
 import { Menu } from "lucide-react";
 import { useState } from "react";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+const navItems = [
+  { name: "Login", href: "/login" },
+  { name: "Signup", href: "/signup" },
+  { name: "Dashboard", href: "/dashboard" },
+];
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-
   const NavItems = () => (
     <>
-      <Button variant="ghost" asChild onClick={() => setIsOpen(false)}>
-        <Link href="/login">Login</Link>
-      </Button>
-      <Button variant="ghost" asChild onClick={() => setIsOpen(false)}>
-        <Link href="/signup">Signup</Link>
-      </Button>
-      <Button variant="ghost" asChild onClick={() => setIsOpen(false)}>
-        <Link href="/">Logout</Link>
-      </Button>
+      {navItems.map((item) => (
+        <Button
+          key={item.name}
+          variant="ghost"
+          asChild
+          className="border dark:border-white/10"
+          onClick={() => setIsOpen(false)}
+        >
+          <Link key={item.name} href={item.href}>
+            {item.name}
+          </Link>
+        </Button>
+      ))}
     </>
   );
 
@@ -52,7 +60,7 @@ export default function Header() {
               <VisuallyHidden>
                 <SheetTitle>Navigation</SheetTitle>
               </VisuallyHidden>
-              <div className="flex flex-col space-y-4 mt-4">
+              <div className="flex flex-col space-y-4 mt-4 ">
                 <NavItems />
               </div>
             </SheetContent>
