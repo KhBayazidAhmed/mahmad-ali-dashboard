@@ -1,35 +1,19 @@
-'use client'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
 
-import { useState, useEffect } from 'react'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Button } from "@/components/ui/button"
-
-interface User {
-  id: number
-  name: string
-  email: string
-  balance: number
-}
-
+const users = [
+  { id: 1, name: "John Doe", email: "john@example.com", balance: 1000 },
+  { id: 2, name: "Jane Smith", email: "jane@example.com", balance: 1500 },
+  { id: 3, name: "Bob Johnson", email: "bob@example.com", balance: 750 },
+];
 export default function UserTable() {
-  const [users, setUsers] = useState<User[]>([])
-
-  useEffect(() => {
-    fetch('/api/users')
-      .then((res) => res.json())
-      .then((data) => setUsers(data))
-  }, [])
-
-  const handleEdit = (id: number) => {
-    // Implement edit functionality
-    console.log(`Edit user with id: ${id}`)
-  }
-
-  const handleAddMoney = (id: number) => {
-    // Implement add money functionality
-    console.log(`Add money to user with id: ${id}`)
-  }
-
   return (
     <div className="rounded-md border">
       <Table>
@@ -46,12 +30,12 @@ export default function UserTable() {
             <TableRow key={user.id}>
               <TableCell>{user.name}</TableCell>
               <TableCell>{user.email}</TableCell>
-              <TableCell>${user.balance.toFixed(2)}</TableCell>
+              <TableCell>{user.balance.toFixed(2)}</TableCell>
               <TableCell>
-                <Button variant="outline" size="sm" onClick={() => handleEdit(user.id)} className="mr-2">
+                <Button variant="outline" size="sm" className="mr-2">
                   Edit
                 </Button>
-                <Button variant="outline" size="sm" onClick={() => handleAddMoney(user.id)}>
+                <Button variant="outline" size="sm">
                   Add Money
                 </Button>
               </TableCell>
@@ -60,6 +44,5 @@ export default function UserTable() {
         </TableBody>
       </Table>
     </div>
-  )
+  );
 }
-
