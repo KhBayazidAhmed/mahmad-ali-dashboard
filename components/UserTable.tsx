@@ -25,7 +25,7 @@ export default function UserTable() {
             <TableHead>Actions</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody>
+        <TableBody className="text-nowrap">
           {users.map((user) => (
             <TableRow key={user.id}>
               <TableCell>{user.name}</TableCell>
