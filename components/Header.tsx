@@ -15,7 +15,7 @@ import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 const navItems = [
   { name: "Login", href: "/login" },
   { name: "Signup", href: "/signup" },
-  { name: "Dashboard", href: "/dashboard" },
+  { name: "Dashboard", href: "/admin" },
 ];
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,7 +40,7 @@ export default function Header() {
   return (
     <header className="border-b">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <Link href="/dashboard" className="text-xl font-bold">
+        <Link href="/admin" className="text-xl font-bold">
           Dashboard
         </Link>
         <nav className="hidden md:flex items-center space-x-4">
