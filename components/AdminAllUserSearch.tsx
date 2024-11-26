@@ -12,19 +12,20 @@ import { useState } from "react";
 import { DialogTitle } from "./ui/dialog";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { Search } from "lucide-react";
+import { Input } from "./ui/input";
 
 export function AdminAllUserSearch({ name }: { name: string }) {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <p className="text-sm text-muted-foreground flex gap-2 items-center justify-center">
-        <button
-          onClick={() => setOpen(true)}
-          className="text-muted-foreground flex gap-2 items-center justify-center"
-        >
-          <Search className="h-4 w-4" />
-        </button>{" "}
-      </p>
+      <div className="flex items-center gap-2">
+        <Input
+          onFocus={() => setOpen(true)}
+          className="w-full border border-gray-800 focus:border-gray-500 focus:ring focus:ring-gray-200 text-gray-900 placeholder-gray-400 rounded-md px-2 py-1"
+          placeholder={`Search by ${name}`}
+        />
+        <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+      </div>
       <CommandDialog open={open} onOpenChange={setOpen}>
         <DialogTitle>
           <VisuallyHidden>Search Dialog</VisuallyHidden>

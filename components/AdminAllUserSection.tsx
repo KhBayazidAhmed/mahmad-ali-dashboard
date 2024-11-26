@@ -22,7 +22,7 @@ export default function AdminAllUserSection() {
                 <TableHead key={index}>
                   <div className="flex items-center justify-center gap-2">
                     {heading}
-                    <AdminAllUserSearch name={heading} />
+                    {/* <AdminAllUserSearch name={heading} /> */}
                   </div>
                 </TableHead>
               )
@@ -30,16 +30,17 @@ export default function AdminAllUserSection() {
           </TableRow>
         </TableHeader>
         <TableBody className="text-nowrap text-center">
-          <TableRow className="bg-muted">
-            <TableCell className="hover:bg-muted">
+          <TableRow>
+            <TableCell>
               <AdminAllUserSearch name={"Name"} />
             </TableCell>
-            <TableCell className="hover:bg-muted">
+            <TableCell>
               <AdminAllUserSearch name={"Email"} />
             </TableCell>
-            <TableCell className="hover:bg-muted">
+            <TableCell>
               <AdminAllUserSearch name={"Whatsapp"} />
             </TableCell>
+            <TableCell colSpan={2}>No search</TableCell>
           </TableRow>
           {usersDemo.map((user) => (
             <TableRow key={user.id}>
