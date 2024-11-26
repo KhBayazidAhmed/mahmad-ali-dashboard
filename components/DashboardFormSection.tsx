@@ -12,28 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-const idType = [
-  {
-    name: "NId_No",
-    value: "NId_No",
-  },
-  {
-    name: "From_No",
-    value: "From_No",
-  },
-  {
-    name: "Voter_No",
-    value: "Voter_No",
-  },
-  {
-    name: "Birth_No",
-    value: "Birth_No",
-  },
-  {
-    name: "Mobile_No",
-    value: "Mobile_No",
-  },
-];
+import { dashboardFormIdTypes } from "@/lib/config";
 
 export default function DashboardFormSection() {
   return (
@@ -53,7 +32,7 @@ export default function DashboardFormSection() {
                 <SelectValue placeholder="Choose a type" />
               </SelectTrigger>
               <SelectContent>
-                {idType.map((item) => (
+                {dashboardFormIdTypes.map((item) => (
                   <SelectItem
                     key={item.value}
                     className="dark:hover:bg-gray-400"

@@ -1,12 +1,10 @@
-import UserTable from "@/components/UserTable";
-import React from "react";
+import AdminAllUserSection from "@/components/AdminAllUserSection";
 
 export default function page() {
   return (
-    <div>
-      {" "}
-      <h1 className="md:text-3xl text-xl font-bold mb-6">User Dashboard</h1>
-      <UserTable />
-    </div>
+    <section className="container mx-auto mt-8 px-4">
+      <h1 className="md:text-3xl text-xl font-bold mb-6">All users </h1>
+      <AdminAllUserSection />
+    </section>
   );
 }

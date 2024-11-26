@@ -1,10 +1,10 @@
-import HeaderDashboard from "@/components/HeaderDashboard";
-import React from "react";
+import Header from "@/components/Header";
+import { headerNavItemsDashboard } from "@/lib/config";
 
 export default function layout({ children }: { children: React.ReactNode }) {
   return (
     <div>
-      <HeaderDashboard />
+      <Header items={headerNavItemsDashboard} />
       {children}
     </div>
   );

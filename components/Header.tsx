@@ -1,5 +1,4 @@
 "use client";
-
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "./ThemeToggler";
@@ -12,30 +11,12 @@ import {
 import { Menu } from "lucide-react";
 import { useState } from "react";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-const navItems = [
-  { name: "Login", href: "/login" },
-  { name: "Signup", href: "/signup" },
-  { name: "Dashboard", href: "/admin" },
-];
-export default function HeaderAdmin() {
+import DashboardProfile from "./DashboardProfile";
+import HeaderNavItems from "./HeaderNavItems";
+import { NavItem } from "@/lib/types";
+
+export default function Header({ items }: { items: NavItem[] }) {
   const [isOpen, setIsOpen] = useState(false);
-  const NavItems = () => (
-    <>
-      {navItems.map((item) => (
-        <Button
-          key={item.name}
-          variant="ghost"
-          asChild
-          className="border dark:border-white/10"
-          onClick={() => setIsOpen(false)}
-        >
-          <Link key={item.name} href={item.href}>
-            {item.name}
-          </Link>
-        </Button>
-      ))}
-    </>
-  );
 
   return (
     <header className="border-b">
@@ -44,11 +25,13 @@ export default function HeaderAdmin() {
           Dashboard
         </Link>
         <nav className="hidden md:flex items-center space-x-4">
-          <NavItems />
+          <HeaderNavItems items={items} setIsOpen={setIsOpen} />
           <ModeToggle />
+          <DashboardProfile />
         </nav>
-        <div className="md:hidden flex items-center">
+        <div className="md:hidden flex items-center ">
           <ModeToggle />
+          <DashboardProfile />
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="ml-2">
@@ -61,7 +44,7 @@ export default function HeaderAdmin() {
                 <SheetTitle>Navigation</SheetTitle>
               </VisuallyHidden>
               <div className="flex flex-col space-y-4 mt-4 ">
-                <NavItems />
+                <HeaderNavItems items={items} setIsOpen={setIsOpen} />
               </div>
             </SheetContent>
           </Sheet>
