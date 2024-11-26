@@ -17,7 +17,7 @@ const navItems = [
   { name: "Signup", href: "/signup" },
   { name: "Dashboard", href: "/admin" },
 ];
-export default function Header() {
+export default function HeaderAdmin() {
   const [isOpen, setIsOpen] = useState(false);
   const NavItems = () => (
     <>
