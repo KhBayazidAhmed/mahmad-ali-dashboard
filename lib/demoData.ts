@@ -1,4 +1,4 @@
-import { AdminAllUserActions, Log, User } from "./types";
+import { Log, User } from "./types";
 
 export const logsDemo: Log[] = [
   {
@@ -96,23 +96,5 @@ export const usersDemo: User[] = [
     whatsapp: "+919876543210",
     email: "john@example.com",
     balance: 1000,
-  },
-];
-export const adminAllUserActions: AdminAllUserActions[] = [
-  {
-    name: "Edit",
-    actions: () => {},
-  },
-  {
-    name: "Add Money",
-    actions: () => {},
-  },
-  {
-    name: "Add Whatsapp",
-    actions: () => {},
-  },
-  {
-    name: "Login",
-    actions: () => {},
   },
 ];

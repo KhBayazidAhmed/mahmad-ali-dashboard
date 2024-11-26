@@ -79,14 +79,6 @@ export const dashboardSummaryHeadings = [
     icon: FaBitcoin,
   },
 ];
-export const headerNavItemsAdmin = [
-  { name: "Login", href: "/login" },
-  { name: "Signup", href: "/signup" },
-];
-export const headerNavItemsDashboard = [
-  { name: "Login", href: "/login" },
-  { name: "Signup", href: "/signup" },
-];
 export const adminSummaryHeadings = [
   {
     name: "Users",
@@ -121,4 +113,12 @@ export const adminSummaryHeadings = [
       },
     ],
   },
+];
+export const headerNavItemsAdmin = [
+  { name: "Login", href: "/login" },
+  { name: "Signup", href: "/signup" },
+];
+export const headerNavItemsDashboard = [
+  { name: "Login", href: "/login" },
+  { name: "Signup", href: "/signup" },
 ];

@@ -6,9 +6,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
 import { AdminAllUserPagination } from "./AdminAllUserPagination";
-import { adminAllUserActions, usersDemo } from "@/lib/demoData";
+import { usersDemo } from "@/lib/demoData";
+import { AdminAllUserSearch } from "./AdminAllUserSearch";
+import AdminAllUserActions from "./AdminAllUserActions";
 
 export default function AdminAllUserSection() {
   return (
@@ -18,14 +19,28 @@ export default function AdminAllUserSection() {
           <TableRow>
             {["Name", "Email", "Whatsapp", "Balance", "Actions"].map(
               (heading, index) => (
-                <TableHead key={index} className="text-center">
-                  {heading}
+                <TableHead key={index}>
+                  <div className="flex items-center justify-center gap-2">
+                    {heading}
+                    <AdminAllUserSearch name={heading} />
+                  </div>
                 </TableHead>
               )
             )}
           </TableRow>
         </TableHeader>
         <TableBody className="text-nowrap text-center">
+          <TableRow className="bg-muted">
+            <TableCell className="hover:bg-muted">
+              <AdminAllUserSearch name={"Name"} />
+            </TableCell>
+            <TableCell className="hover:bg-muted">
+              <AdminAllUserSearch name={"Email"} />
+            </TableCell>
+            <TableCell className="hover:bg-muted">
+              <AdminAllUserSearch name={"Whatsapp"} />
+            </TableCell>
+          </TableRow>
           {usersDemo.map((user) => (
             <TableRow key={user.id}>
               <TableCell>{user.name}</TableCell>
@@ -33,16 +48,7 @@ export default function AdminAllUserSection() {
               <TableCell>{user.whatsapp}</TableCell>
               <TableCell>{user.balance.toFixed(2)}</TableCell>
               <TableCell>
-                {adminAllUserActions.map((action) => (
-                  <Button
-                    key={action.name}
-                    variant="outline"
-                    size="sm"
-                    className="mr-2"
-                  >
-                    {action.name}
-                  </Button>
-                ))}
+                <AdminAllUserActions />
               </TableCell>
             </TableRow>
           ))}
