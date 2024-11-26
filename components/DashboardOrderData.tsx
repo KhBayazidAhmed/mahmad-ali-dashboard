@@ -23,7 +23,7 @@ const order = [
     deliveryTime: "2024-11-26 10:45 AM",
   },
 ];
-export default function UserTable() {
+export default function DashboardOrderData() {
   return (
     <div className="rounded-md border text-center">
       <Table className="text-center">
