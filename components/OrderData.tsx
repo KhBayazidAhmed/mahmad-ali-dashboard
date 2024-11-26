@@ -66,6 +66,13 @@ export default function UserTable() {
               </TableCell>
             </TableRow>
           ))}
+          <TableRow>
+            <TableCell colSpan={7}>
+              <Button variant="outline" size="sm">
+                View All
+              </Button>
+            </TableCell>
+          </TableRow>
         </TableBody>
       </Table>
     </div>

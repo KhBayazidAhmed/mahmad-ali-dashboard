@@ -8,11 +8,13 @@ import {
   SelectItem,
   SelectValue,
 } from "@/components/ui/select";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import OrderData from "@/components/OrderData";
+import { Textarea } from "@/components/ui/textarea";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 const summaryHeadings = [
   {
@@ -69,9 +71,6 @@ const summaryHeadings = [
 export default function Page() {
   return (
     <div className="container mx-auto mt-8 px-4">
-      <div className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6">
-        Dashboard Summary
-      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {summaryHeadings.map((heading) => (
           <Link
@@ -106,29 +105,37 @@ export default function Page() {
   );
 }
 
-const FormSelectType = [
+const idType = [
   {
-    name: "Sign Copy",
-    value: "sign-copy",
+    name: "NId_No",
+    value: "NId_No",
   },
   {
-    name: "Server Copy",
-    value: "server-copy",
+    name: "From_No",
+    value: "From_No",
   },
   {
-    name: "NID Copy",
-    value: "nid-copy",
+    name: "Voter_No",
+    value: "Voter_No",
+  },
+  {
+    name: "Birth_No",
+    value: "Birth_No",
+  },
+  {
+    name: "Mobile_No",
+    value: "Mobile_No",
   },
 ];
 
 export function Form() {
   return (
-    <Card className=" shadow-lg border border-gray-200 dark:border-gray-700">
-      <CardHeader className="p-6 border-b border-gray-200 dark:border-gray-700">
+    <Card className=" min-w-80 shadow-lg border border-gray-200 dark:border-gray-700">
+      {/* <CardHeader className="p-6 border-b border-gray-200 dark:border-gray-700">
         <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 text-center">
           Cart Form
         </h2>
-      </CardHeader>
+      </CardHeader> */}
       <CardContent className="p-6 space-y-6">
         <form className="space-y-6">
           {/* Type Selection */}
@@ -144,7 +151,7 @@ export function Form() {
                 <SelectValue placeholder="Choose a type" />
               </SelectTrigger>
               <SelectContent>
-                {FormSelectType.map((item) => (
+                {idType.map((item) => (
                   <SelectItem
                     key={item.value}
                     className="dark:hover:bg-gray-400"
@@ -163,10 +170,10 @@ export function Form() {
               htmlFor="idNumber"
               className="text-sm text-gray-700 dark:text-gray-300"
             >
-              Nid Number / Voter Number / Form Number
+              Number
             </Label>
             <Input
-              type="text"
+              type="number"
               id="idNumber"
               placeholder="Enter your ID number"
               className="w-full border-2 border-gray-200 dark:border-gray-700"
@@ -191,6 +198,57 @@ export function Form() {
             />
           </div>
 
+          <div className="space-y-4">
+            <Label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
+              Select Copy Type
+            </Label>
+            <RadioGroup
+              defaultValue="sign-copy"
+              className="flex justify-between items-center "
+            >
+              {/* Sign Copy Option */}
+              <div className="flex items-center gap-2">
+                <RadioGroupItem
+                  id="sign-copy"
+                  value="sign-copy"
+                  className="form-radio text-blue-600 focus:ring-blue-500 dark:text-blue-400 dark:focus:ring-blue-300"
+                />
+                <Label
+                  className="cursor-pointer text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+                  htmlFor="sign-copy"
+                >
+                  Sign Copy
+                </Label>
+              </div>
+              {/* Server Copy Option */}
+              <div className="flex items-center justify-center  gap-2">
+                <RadioGroupItem
+                  id="server-copy"
+                  value="server-copy"
+                  className="form-radio  text-blue-600 focus:ring-blue-500 dark:text-blue-400 dark:focus:ring-blue-300"
+                />
+                <Label
+                  className="cursor-pointer text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+                  htmlFor="server-copy"
+                >
+                  Server Copy
+                </Label>
+              </div>
+            </RadioGroup>
+          </div>
+          {/* Note Input */}
+          <div className="space-y-2">
+            <Label
+              htmlFor="note"
+              className="text-sm text-gray-700 dark:text-gray-300"
+            >
+              Note
+            </Label>
+            <Textarea
+              className="w-full border-2 border-gray-200 dark:border-gray-700"
+              placeholder="Type your message here."
+            />
+          </div>
           {/* Submit Button */}
           <div>
             <Button className="w-full" variant="default">
