@@ -76,7 +76,7 @@ export default function Page() {
           <Link
             key={heading.name}
             href={heading.href}
-            className="flex flex-col items-center bg-white dark:bg-gray-800 shadow-sm dark:shadow-md rounded-lg p-6 hover:shadow-lg dark:hover:shadow-lg transition-shadow duration-300 border border-gray-200 dark:border-gray-700"
+            className="flex flex-col items-center border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:shadow-lg dark:hover:shadow-lg transition-shadow duration-300"
           >
             <div className="text-gray-700 dark:text-gray-300 text-3xl md:text-4xl mb-4">
               {heading.icon}
@@ -99,6 +99,7 @@ export default function Page() {
     </div>
   );
 }
+
 const FormSelectType = [
   {
     name: "Sign Copy",
@@ -113,16 +114,17 @@ const FormSelectType = [
     value: "nid-copy",
   },
 ];
+
 export function Form() {
   return (
-    <div className="container mx-auto  mt-8">
-      <Card className="max-w-lg  mx-auto shadow-lg">
-        <CardHeader className="p-6 bg-gray-50 dark:bg-gray-800 rounded-t-lg">
+    <div className="container mx-auto mt-8">
+      <Card className="max-w-lg mx-auto shadow-lg border border-gray-200 dark:border-gray-700">
+        <CardHeader className="p-6 border-b border-gray-200 dark:border-gray-700">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 text-center">
             Fill the Form
           </h2>
         </CardHeader>
-        <CardContent className="p-6 bg-white dark:bg-gray-800 space-y-6">
+        <CardContent className="p-6 space-y-6">
           <form className="space-y-6">
             {/* Type Selection */}
             <div className="space-y-2">
@@ -133,10 +135,10 @@ export function Form() {
                 Select Type
               </Label>
               <Select>
-                <SelectTrigger className="w-full border-white border-2 dark:border-gray-700">
+                <SelectTrigger className="w-full border-2 border-gray-200 dark:border-gray-700">
                   <SelectValue placeholder="Choose a type" />
                 </SelectTrigger>
-                <SelectContent className="bg-white  dark:bg-gray-800  ">
+                <SelectContent>
                   {FormSelectType.map((item) => (
                     <SelectItem
                       key={item.value}
@@ -162,7 +164,7 @@ export function Form() {
                 type="text"
                 id="idNumber"
                 placeholder="Enter your ID number"
-                className="w-full border-white border-2 dark:border-gray-700"
+                className="w-full border-2 border-gray-200 dark:border-gray-700"
                 required
               />
             </div>
@@ -179,7 +181,7 @@ export function Form() {
                 type="text"
                 id="name"
                 placeholder="Enter your name"
-                className="w-full border-white border-2 dark:border-gray-700"
+                className="w-full border-2 border-gray-200 dark:border-gray-700"
                 required
               />
             </div>
