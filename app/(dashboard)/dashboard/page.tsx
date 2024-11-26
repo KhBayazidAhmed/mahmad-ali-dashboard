@@ -12,6 +12,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import OrderData from "@/components/OrderData";
 
 const summaryHeadings = [
   {
@@ -95,7 +96,12 @@ export default function Page() {
           </Link>
         ))}
       </div>
-      <Form />
+      <div className="flex  flex-col lg:flex-row gap-6 mt-8">
+        <Form />
+        <div className=" flex-1 p-y-6">
+          <OrderData />
+        </div>
+      </div>
     </div>
   );
 }
@@ -117,84 +123,82 @@ const FormSelectType = [
 
 export function Form() {
   return (
-    <div className="container mx-auto mt-8">
-      <Card className="max-w-lg mx-auto shadow-lg border border-gray-200 dark:border-gray-700">
-        <CardHeader className="p-6 border-b border-gray-200 dark:border-gray-700">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 text-center">
-            Fill the Form
-          </h2>
-        </CardHeader>
-        <CardContent className="p-6 space-y-6">
-          <form className="space-y-6">
-            {/* Type Selection */}
-            <div className="space-y-2">
-              <Label
-                htmlFor="type"
-                className="text-sm text-gray-700 dark:text-gray-300"
-              >
-                Select Type
-              </Label>
-              <Select>
-                <SelectTrigger className="w-full border-2 border-gray-200 dark:border-gray-700">
-                  <SelectValue placeholder="Choose a type" />
-                </SelectTrigger>
-                <SelectContent>
-                  {FormSelectType.map((item) => (
-                    <SelectItem
-                      key={item.value}
-                      className="dark:hover:bg-gray-400"
-                      value={item.value}
-                    >
-                      {item.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
+    <Card className=" shadow-lg border border-gray-200 dark:border-gray-700">
+      <CardHeader className="p-6 border-b border-gray-200 dark:border-gray-700">
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 text-center">
+          Cart Form
+        </h2>
+      </CardHeader>
+      <CardContent className="p-6 space-y-6">
+        <form className="space-y-6">
+          {/* Type Selection */}
+          <div className="space-y-2">
+            <Label
+              htmlFor="type"
+              className="text-sm text-gray-700 dark:text-gray-300"
+            >
+              Select Type
+            </Label>
+            <Select>
+              <SelectTrigger className="w-full border-2 border-gray-200 dark:border-gray-700">
+                <SelectValue placeholder="Choose a type" />
+              </SelectTrigger>
+              <SelectContent>
+                {FormSelectType.map((item) => (
+                  <SelectItem
+                    key={item.value}
+                    className="dark:hover:bg-gray-400"
+                    value={item.value}
+                  >
+                    {item.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
 
-            {/* ID Number Input */}
-            <div className="space-y-2">
-              <Label
-                htmlFor="idNumber"
-                className="text-sm text-gray-700 dark:text-gray-300"
-              >
-                Nid Number / voter Number / Form Number
-              </Label>
-              <Input
-                type="text"
-                id="idNumber"
-                placeholder="Enter your ID number"
-                className="w-full border-2 border-gray-200 dark:border-gray-700"
-                required
-              />
-            </div>
+          {/* ID Number Input */}
+          <div className="space-y-2">
+            <Label
+              htmlFor="idNumber"
+              className="text-sm text-gray-700 dark:text-gray-300"
+            >
+              Nid Number / Voter Number / Form Number
+            </Label>
+            <Input
+              type="text"
+              id="idNumber"
+              placeholder="Enter your ID number"
+              className="w-full border-2 border-gray-200 dark:border-gray-700"
+              required
+            />
+          </div>
 
-            {/* Name Input */}
-            <div className="space-y-2">
-              <Label
-                htmlFor="name"
-                className="text-sm text-gray-700 dark:text-gray-300"
-              >
-                Name
-              </Label>
-              <Input
-                type="text"
-                id="name"
-                placeholder="Enter your name"
-                className="w-full border-2 border-gray-200 dark:border-gray-700"
-                required
-              />
-            </div>
+          {/* Name Input */}
+          <div className="space-y-2">
+            <Label
+              htmlFor="name"
+              className="text-sm text-gray-700 dark:text-gray-300"
+            >
+              Name
+            </Label>
+            <Input
+              type="text"
+              id="name"
+              placeholder="Enter your name"
+              className="w-full border-2 border-gray-200 dark:border-gray-700"
+              required
+            />
+          </div>
 
-            {/* Submit Button */}
-            <div>
-              <Button className="w-full" variant="default">
-                Submit
-              </Button>
-            </div>
-          </form>
-        </CardContent>
-      </Card>
-    </div>
+          {/* Submit Button */}
+          <div>
+            <Button className="w-full" variant="default">
+              Submit
+            </Button>
+          </div>
+        </form>
+      </CardContent>
+    </Card>
   );
 }
