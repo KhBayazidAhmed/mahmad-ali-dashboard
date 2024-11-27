@@ -174,3 +174,53 @@ export const orderDataDemo = [
     deliveryTime: "2024-11-26 10:45 AM",
   },
 ];
+export const orderPendingDataDemo = [
+  {
+    id: 1,
+    formNumber: "1234567890",
+    status: "Pending",
+    orderTime: "2024-11-26 10:45 AM",
+    username: "john",
+    type: "NID Copy",
+  },
+  {
+    id: 2,
+    formNumber: "1234567890",
+    status: "Pending",
+    orderTime: new Date().toLocaleString(),
+    username: "john",
+    type: "NID Copy",
+  },
+  {
+    id: 3,
+    formNumber: "1234567890",
+    status: "Pending",
+    orderTime: "2024-11-26 10:45 AM",
+    username: "john",
+    type: "NID Copy",
+  },
+  {
+    id: 4,
+    formNumber: "1234567890",
+    status: "Pending",
+    orderTime: "2024-11-26 10:45 AM",
+    username: "john",
+    type: "NID Copy",
+  },
+  {
+    id: 5,
+    formNumber: "1234567890",
+    status: "Pending",
+    orderTime: "2024-11-26 10:45 AM",
+    username: "john",
+    type: "NID Copy",
+  },
+  {
+    id: 6,
+    formNumber: "1234567890",
+    status: "Pending",
+    orderTime: "2024-11-26 10:45 AM",
+    username: "john",
+    type: "NID Copy",
+  },
+];

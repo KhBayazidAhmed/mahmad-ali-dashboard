@@ -1,6 +1,4 @@
 import React from "react";
-import { FaDownload, FaRegEye } from "react-icons/fa";
-
 import {
   Table,
   TableBody,
@@ -9,8 +7,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { orderDataDemo } from "@/lib/demoData";
+import { orderPendingDataDemo } from "@/lib/demoData";
+import { formatRelativeTime } from "@/lib/helperFunction";
 export default function AdminPendingOrderTable() {
   return (
     <div className="rounded-md border text-center">
@@ -19,40 +17,27 @@ export default function AdminPendingOrderTable() {
           <TableRow>
             <TableHead className="text-center">Id</TableHead>
             <TableHead className="text-center">Number </TableHead>
-
+            <TableHead className="text-center">Order Type </TableHead>
             <TableHead className="text-center">Order Time </TableHead>
             <TableHead className="text-center">Status</TableHead>
+            <TableHead className="text-center">Pending Time</TableHead>
             <TableHead className="text-center">User WhatsApp</TableHead>
-            <TableHead className="text-center">
-              Sign Copy / Server Copy
-            </TableHead>
-            <TableHead className="text-center">NID Copy</TableHead>
+            <TableHead className="text-center">User Name</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody className="text-nowrap">
-          {orderDataDemo.map((user, index) => (
+          {orderPendingDataDemo.map((user, index) => (
             <TableRow key={index}>
               <TableCell>{user.id}</TableCell>
               <TableCell>{user.formNumber}</TableCell>
-              <TableCell>{user.deliveryTime}</TableCell>
+              <TableCell>NID Copy</TableCell>
+              <TableCell>{user.orderTime}</TableCell>
               <TableCell>{user.status}</TableCell>
+              <TableCell>
+                {formatRelativeTime(new Date(user.orderTime))}
+              </TableCell>
               <TableCell>{user.formNumber}</TableCell>
-              <TableCell>
-                <Button variant="outline" size="sm" className="mr-2">
-                  <FaDownload />
-                </Button>
-                <Button variant="outline" size="sm" className="mr-2">
-                  <FaRegEye />
-                </Button>
-              </TableCell>
-              <TableCell>
-                <Button variant="outline" size="sm" className="mr-2">
-                  <FaDownload />
-                </Button>
-                <Button variant="outline" size="sm" className="mr-2">
-                  <FaRegEye />
-                </Button>
-              </TableCell>
+              <TableCell>{user.username}</TableCell>
             </TableRow>
           ))}
         </TableBody>
