@@ -12,6 +12,8 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { Input } from "./ui/input";
+import { Label } from "./ui/label";
+import { ServiceAndPricingItems } from "@/lib/config";
 
 export function AdminAllUserEditActions() {
   return (
@@ -30,16 +32,20 @@ export function AdminAllUserEditActions() {
         </DialogHeader>
         <Card>
           <CardHeader>
-            <CardTitle>Service Changes</CardTitle>
+            <CardTitle>Service Changes and Pricing</CardTitle>
           </CardHeader>
           <CardContent className="grid gap-4">
-            {["Sign Copy", "Server Copy", "NID Maker"].map((heading, index) => (
+            {ServiceAndPricingItems.map((heading, index) => (
               <div
                 key={index}
-                className=" flex items-center  justify-center space-x-4 rounded-md border p-4"
+                className="flex flex-col space-y-3 rounded-md border p-4 "
               >
-                <Input type="number" placeholder={` ${heading} price`} />
-                <Switch />
+                <Label className="flex items-center justify-between">
+                  Current price : {10} Taka <Switch />
+                </Label>
+                <div className="flex  items-center flex-row gap-2">
+                  <Input type="number" placeholder={` ${heading} price`} />
+                </div>
               </div>
             ))}
           </CardContent>

@@ -115,10 +115,11 @@ export const adminSummaryHeadings = [
   },
 ];
 export const headerNavItemsAdmin = [
-  { name: "Login", href: "/login" },
+  { name: "Run Offer", href: "/admin/run-offer" },
   { name: "Signup", href: "/signup" },
 ];
 export const headerNavItemsDashboard = [
   { name: "Login", href: "/login" },
   { name: "Signup", href: "/signup" },
 ];
+export const ServiceAndPricingItems = ["Sign Copy", "Server Copy", "NID Maker"];
