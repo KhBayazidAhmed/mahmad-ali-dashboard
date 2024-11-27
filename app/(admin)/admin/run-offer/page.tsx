@@ -28,7 +28,7 @@ export default function Page() {
               </div>
             ))}
 
-            <Button variant="destructive" className="w-full">
+            <Button variant="secondary" className="w-full">
               Add Offer
             </Button>
           </div>
@@ -65,7 +65,7 @@ export default function Page() {
           <div className="space-y-4">
             <Input type="text" placeholder="Notice Title" />
             <Textarea placeholder="Notice Content" />
-            <Button variant="outline" className="w-full">
+            <Button variant="secondary" className="w-full">
               Add Offer
             </Button>
           </div>
@@ -75,14 +75,14 @@ export default function Page() {
           {noticeDemo.map((notice, index) => (
             <AccordionItem value={notice.name} key={index}>
               <AccordionTrigger
-                className={`${notice.running && "text-blue-600"}`}
+                className={`${notice.running && "text-red-600"}`}
               >
                 {notice.name} {notice.running && "notice is running"}
               </AccordionTrigger>
               <AccordionContent>
                 <p className="text-sm">
                   {notice.content}
-                  <Button variant="secondary" className="w-full my-3">
+                  <Button variant="default" className="w-full my-3">
                     {notice.running ? "End" : "Start"}
                   </Button>
                 </p>
