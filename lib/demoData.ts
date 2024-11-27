@@ -98,3 +98,41 @@ export const usersDemo: User[] = [
     balance: 1000,
   },
 ];
+export const offersDemo = [
+  {
+    id: 1,
+    title: "Current Offer",
+    description:
+      "Get 20% off on your next purchase. Valid until 30th November 2024.",
+    running: true,
+  },
+  {
+    id: 2,
+    title: "Price 5 taka!",
+    description:
+      "Special offer from now to 30th November 2024 price will be 5 taka",
+    running: false,
+  },
+];
+export const noticeDemo = [
+  {
+    name: "notice 1 ",
+    running: true,
+    content:
+      "📢 Special Offer: Get 20% off until November 30th!🎉 New Features Coming Soon – Stay Tuned!🚀 Exclusive Discount for Premium Members!📢 Special Offer: Get 20% off until November 30th!🎉 New Features Coming Soon – Stay Tuned!🚀 Exclusive Discount for Premium Members!",
+  },
+  {
+    name: "notice 2 ",
+    running: false,
+
+    content:
+      "📢 Special Offer: Get 20% off until November 30th!🎉 New Features Coming Soon – Stay Tuned!🚀 Exclusive Discount for Premium Members!📢 Special Offer: Get 20% off until November 30th!🎉 New Features Coming Soon – Stay Tuned!🚀 Exclusive Discount for Premium Members!",
+  },
+  {
+    name: "notice 3 ",
+    running: false,
+
+    content:
+      "📢 Special Offer: Get 20% off until November 30th!🎉 New Features Coming Soon – Stay Tuned!🚀 Exclusive Discount for Premium Members!📢 Special Offer: Get 20% off until November 30th!🎉 New Features Coming Soon – Stay Tuned!🚀 Exclusive Discount for Premium Members!",
+  },
+];
