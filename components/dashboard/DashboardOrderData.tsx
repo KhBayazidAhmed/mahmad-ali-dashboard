@@ -1,4 +1,4 @@
-import { FaDownload, FaRegEye } from "react-icons/fa";
+import { FaDownload, FaRegEye, FaEdit } from "react-icons/fa";
 
 import {
   Table,
@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { orderDataDemo } from "@/lib/demoData";
+import Link from "next/link";
 export default function DashboardOrderData() {
   return (
     <div className="rounded-md border text-center">
@@ -49,6 +50,11 @@ export default function DashboardOrderData() {
                 </Button>
                 <Button variant="outline" size="sm" className="mr-2">
                   <FaRegEye />
+                </Button>
+                <Button asChild variant="outline" size="sm" className="mr-2">
+                  <Link href="/dashboard/nid-edit">
+                    <FaEdit />
+                  </Link>
                 </Button>
               </TableCell>
             </TableRow>
