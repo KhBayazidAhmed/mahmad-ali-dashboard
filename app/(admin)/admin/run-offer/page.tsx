@@ -55,29 +55,13 @@ export default function Page() {
             Add New Offer
           </h3>
           <div className="space-y-4">
-            <Input
-              type="text"
-              placeholder="Offer Title"
-              value={newOffer.title}
-              onChange={(e) =>
-                setNewOffer({ ...newOffer, title: e.target.value })
-              }
-              className="w-full"
-            />
             {ServiceAndPricingItems.map((heading, index) => (
               <div key={index} className="rounded-md border p-4 space-y-3">
                 <Label className="block">Current price: 10 Taka</Label>
                 <Input type="number" placeholder={`${heading} price`} />
               </div>
             ))}
-            <textarea
-              placeholder="Offer Description"
-              value={newOffer.description}
-              onChange={(e) =>
-                setNewOffer({ ...newOffer, description: e.target.value })
-              }
-              className="w-full rounded-md border p-2 text-sm"
-            />
+
             <Button
               onClick={handleAddOffer}
               variant="destructive"
@@ -94,7 +78,7 @@ export default function Page() {
             key={index}
             className={`rounded-lg border p-4 flex items-start justify-between gap-3 ${
               offer.running
-                ? "bg-gray-100 text-gray-900"
+                ? "bg-red-500 text-red-100 shadow"
                 : "bg-card text-card-foreground shadow"
             }`}
           >
