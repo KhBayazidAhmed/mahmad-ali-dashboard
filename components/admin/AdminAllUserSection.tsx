@@ -6,10 +6,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { AdminAllUserPagination } from "./AdminAllUserPagination";
 import { usersDemo } from "@/lib/demoData";
 import { AdminAllUserSearch } from "./AdminAllUserSearch";
 import AdminAllUserActions from "./AdminAllUserActions";
+import { AdminAllUserPagination } from "./AdminAllUserPagination";
 
 export default function AdminAllUserSection() {
   return (

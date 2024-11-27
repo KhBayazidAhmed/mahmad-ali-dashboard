@@ -9,10 +9,10 @@ import {
   CommandSeparator,
 } from "@/components/ui/command";
 import { useState } from "react";
-import { DialogTitle } from "./ui/dialog";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { Search } from "lucide-react";
-import { Input } from "./ui/input";
+import { Input } from "../ui/input";
+import { DialogTitle } from "../ui/dialog";
 
 export function AdminAllUserSearch({ name }: { name: string }) {
   const [open, setOpen] = useState(false);

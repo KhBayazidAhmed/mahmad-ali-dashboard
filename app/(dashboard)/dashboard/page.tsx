@@ -1,7 +1,7 @@
-import DashboardSummarySection from "@/components/DashboardSummarySection";
-import DashboardFormSection from "@/components/DashboardFormSection";
-import DashboardOrderData from "@/components/DashboardOrderData";
-import DashboardNotice from "@/components/DashboardNotice";
+import DashboardSummarySection from "@/components/dashboard/DashboardSummarySection";
+import DashboardFormSection from "@/components/dashboard/DashboardFormSection";
+import DashboardOrderData from "@/components/dashboard/DashboardOrderData";
+import DashboardNotice from "@/components/dashboard/DashboardNotice";
 
 export default function Page() {
   return (

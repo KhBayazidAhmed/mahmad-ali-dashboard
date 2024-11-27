@@ -1,5 +1,4 @@
-import AdminLogSection from "@/components/AdminLogSection";
-
+import AdminLogSection from "@/components/admin/AdminLogSection";
 export default function page() {
   return (
     <div>

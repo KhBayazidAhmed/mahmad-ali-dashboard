@@ -1,9 +1,11 @@
+import { Log } from "./types";
+
 const DataGenerator = {
   logsDemo: 10,
   usersDemo: 10,
   offersDemo: 3,
   noticeDemo: 3,
-  orderDataDemo: 6,
+  orderDataDemo: 9,
   orderPendingDataDemo: 10,
 };
 
@@ -20,7 +22,7 @@ const randomDate = (days: number) =>
 const randomBoolean = () => Math.random() < 0.5;
 
 // Logs Demo
-export const logsDemo = Array.from(
+export const logsDemo: Log[] = Array.from(
   { length: DataGenerator.logsDemo },
   (_, id) => ({
     id: id + 1,
@@ -32,7 +34,10 @@ export const logsDemo = Array.from(
       "System error detected.",
       "Order processed successfully.",
     ][Math.floor(Math.random() * 6)],
-    level: ["Info", "Warning", "Error"][Math.floor(Math.random() * 3)],
+    level: ["Info", "Warning", "Error"][Math.floor(Math.random() * 3)] as
+      | "Info"
+      | "Warning"
+      | "Error",
     time: randomDate(7),
   })
 );

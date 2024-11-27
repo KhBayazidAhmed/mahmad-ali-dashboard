@@ -127,8 +127,7 @@ export const headerNavItemsAdmin = [
 ];
 
 export const headerNavItemsDashboard = [
-  { name: "Login", href: "/login" },
-  { name: "Add", href: "/signup" },
+  { name: "Whatsapp Config", href: "/dashboard/whatsapp-config" },
 ];
 
 export const ServiceAndPricingItems = ["Sign Copy", "Server Copy", "NID Maker"];

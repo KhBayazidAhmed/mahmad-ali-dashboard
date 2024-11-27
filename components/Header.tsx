@@ -11,7 +11,7 @@ import {
 import { Menu } from "lucide-react";
 import { useState } from "react";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-import DashboardProfile from "./DashboardProfile";
+import DashboardProfile from "./dashboard/DashboardProfile";
 import HeaderNavItems from "./HeaderNavItems";
 import { NavItem } from "@/lib/types";
 

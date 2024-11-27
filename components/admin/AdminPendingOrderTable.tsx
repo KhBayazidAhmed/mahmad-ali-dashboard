@@ -9,7 +9,8 @@ import {
 } from "@/components/ui/table";
 import { orderPendingDataDemo } from "@/lib/demoData";
 import PendingTimeShower from "./PendingTimeShower";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
+
 export default function AdminPendingOrderTable() {
   return (
     <div className="rounded-md border text-center">

@@ -1,4 +1,4 @@
-import AdminAllUserSection from "@/components/AdminAllUserSection";
+import AdminAllUserSection from "@/components/admin/AdminAllUserSection";
 
 export default function page() {
   return (

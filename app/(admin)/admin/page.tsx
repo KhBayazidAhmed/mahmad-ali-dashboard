@@ -1,6 +1,6 @@
-import AdminPendingOrderTable from "@/components/AdminPendingOrderTable";
-import AdminTimeShowing from "@/components/AdminTimeShowing";
-import SummarySectionAdmin from "@/components/SummarySectionAdmin";
+import AdminPendingOrderTable from "@/components/admin/AdminPendingOrderTable";
+import AdminTimeShowing from "@/components/admin/AdminTimeShowing";
+import SummarySectionAdmin from "@/components/admin/SummarySectionAdmin";
 
 export default function Dashboard() {
   return (

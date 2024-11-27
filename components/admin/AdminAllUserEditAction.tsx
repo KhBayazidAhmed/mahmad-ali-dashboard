@@ -11,9 +11,10 @@ import {
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
+
 import { ServiceAndPricingItems } from "@/lib/config";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
 
 export function AdminAllUserEditActions() {
   return (
