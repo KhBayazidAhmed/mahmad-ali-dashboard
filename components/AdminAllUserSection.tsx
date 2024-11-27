@@ -17,12 +17,11 @@ export default function AdminAllUserSection() {
       <Table>
         <TableHeader>
           <TableRow>
-            {["Name", "Email", "Whatsapp", "Balance", "Actions"].map(
+            {["Id", "Name", "Email", "Whatsapp", "Balance", "Actions"].map(
               (heading, index) => (
                 <TableHead key={index}>
                   <div className="flex items-center justify-center gap-2">
                     {heading}
-                    {/* <AdminAllUserSearch name={heading} /> */}
                   </div>
                 </TableHead>
               )
@@ -31,6 +30,7 @@ export default function AdminAllUserSection() {
         </TableHeader>
         <TableBody className="text-nowrap text-center">
           <TableRow>
+            <TableCell></TableCell>
             <TableCell>
               <AdminAllUserSearch name={"Name"} />
             </TableCell>
@@ -42,8 +42,9 @@ export default function AdminAllUserSection() {
             </TableCell>
             <TableCell colSpan={2}>No search</TableCell>
           </TableRow>
-          {usersDemo.map((user) => (
+          {usersDemo.map((user, index) => (
             <TableRow key={user.id}>
+              <TableCell>{index + 1}</TableCell>
               <TableCell>{user.name}</TableCell>
               <TableCell>{user.email}</TableCell>
               <TableCell>{user.whatsapp}</TableCell>
@@ -54,7 +55,7 @@ export default function AdminAllUserSection() {
             </TableRow>
           ))}
           <TableRow>
-            <TableCell colSpan={5}>
+            <TableCell colSpan={6}>
               <AdminAllUserPagination />
             </TableCell>
           </TableRow>

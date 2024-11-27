@@ -8,8 +8,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Switch } from "@/components/ui/switch";
+import { Input } from "./ui/input";
 
 export function AdminAllUserEditActions() {
   return (
@@ -26,20 +28,22 @@ export function AdminAllUserEditActions() {
             Make changes to profile here. Click save when you&apos;re done.
           </DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Name
-            </Label>
-            <Input id="name" defaultValue="test" className="col-span-3" />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="email" className="text-right">
-              Email
-            </Label>
-            <Input id="email" defaultValue="@test.com" className="col-span-3" />
-          </div>
-        </div>
+        <Card>
+          <CardHeader>
+            <CardTitle>Service Changes</CardTitle>
+          </CardHeader>
+          <CardContent className="grid gap-4">
+            {["Sign Copy", "Server Copy", "NID Maker"].map((heading, index) => (
+              <div
+                key={index}
+                className=" flex items-center  justify-center space-x-4 rounded-md border p-4"
+              >
+                <Input type="number" placeholder={` ${heading} price`} />
+                <Switch />
+              </div>
+            ))}
+          </CardContent>
+        </Card>
         <DialogFooter>
           <Button type="submit">Save changes</Button>
         </DialogFooter>

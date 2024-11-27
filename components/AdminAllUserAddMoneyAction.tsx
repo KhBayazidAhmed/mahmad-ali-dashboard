@@ -22,18 +22,17 @@ export default function AdminAllUserAddMoneyAction() {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Add Money</DialogTitle>
-          <DialogDescription>Add money to This user</DialogDescription>
+          <DialogDescription>User name is biz</DialogDescription>
         </DialogHeader>
+
         <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="amount" className="text-right">
-              Amount
-            </Label>
+          <div className="flex flex-col  gap-4">
+            <Label htmlFor="amount">Current Balance : 300</Label>
             <Input
               id="amount"
               type="number"
-              defaultValue={100}
               className="col-span-3"
+              placeholder="Amount"
             />
           </div>
         </div>
