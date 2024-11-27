@@ -1,3 +1,4 @@
+import React from "react";
 import { FaDownload, FaRegEye } from "react-icons/fa";
 
 import {
@@ -10,7 +11,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { orderDataDemo } from "@/lib/demoData";
-export default function DashboardOrderData() {
+export default function AdminPendingOrderTable() {
   return (
     <div className="rounded-md border text-center">
       <Table className="text-center">
@@ -18,9 +19,10 @@ export default function DashboardOrderData() {
           <TableRow>
             <TableHead className="text-center">Id</TableHead>
             <TableHead className="text-center">Number </TableHead>
+
             <TableHead className="text-center">Order Time </TableHead>
             <TableHead className="text-center">Status</TableHead>
-            <TableHead className="text-center">Delivery Time</TableHead>
+            <TableHead className="text-center">User WhatsApp</TableHead>
             <TableHead className="text-center">
               Sign Copy / Server Copy
             </TableHead>
@@ -34,7 +36,7 @@ export default function DashboardOrderData() {
               <TableCell>{user.formNumber}</TableCell>
               <TableCell>{user.deliveryTime}</TableCell>
               <TableCell>{user.status}</TableCell>
-              <TableCell>{user.deliveryTime}</TableCell>
+              <TableCell>{user.formNumber}</TableCell>
               <TableCell>
                 <Button variant="outline" size="sm" className="mr-2">
                   <FaDownload />
@@ -53,13 +55,6 @@ export default function DashboardOrderData() {
               </TableCell>
             </TableRow>
           ))}
-          <TableRow>
-            <TableCell colSpan={7}>
-              <Button variant="outline" size="sm">
-                View All
-              </Button>
-            </TableCell>
-          </TableRow>
         </TableBody>
       </Table>
     </div>

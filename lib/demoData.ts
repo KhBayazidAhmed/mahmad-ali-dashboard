@@ -136,3 +136,41 @@ export const noticeDemo = [
       "📢 Special Offer: Get 20% off until November 30th!🎉 New Features Coming Soon – Stay Tuned!🚀 Exclusive Discount for Premium Members!📢 Special Offer: Get 20% off until November 30th!🎉 New Features Coming Soon – Stay Tuned!🚀 Exclusive Discount for Premium Members!",
   },
 ];
+export const orderDataDemo = [
+  {
+    id: 1,
+    formNumber: "1234567890",
+    status: "Pending",
+    deliveryTime: "2024-11-26 10:45 AM",
+  },
+  {
+    id: 2,
+    formNumber: "1234567890",
+    status: "Pending",
+    deliveryTime: "2024-11-26 10:45 AM",
+  },
+  {
+    id: 3,
+    formNumber: "1234567890",
+    status: "Pending",
+    deliveryTime: "2024-11-26 10:45 AM",
+  },
+  {
+    id: 4,
+    formNumber: "1234567890",
+    status: "Pending",
+    deliveryTime: "2024-11-26 10:45 AM",
+  },
+  {
+    id: 5,
+    formNumber: "1234567890",
+    status: "Pending",
+    deliveryTime: "2024-11-26 10:45 AM",
+  },
+  {
+    id: 6,
+    formNumber: "1234567890",
+    status: "Pending",
+    deliveryTime: "2024-11-26 10:45 AM",
+  },
+];

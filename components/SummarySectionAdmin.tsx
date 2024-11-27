@@ -8,7 +8,7 @@ export default function SummarySection() {
         <Link
           key={heading.name}
           href={heading.href}
-          className="flex flex-col items-center border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:shadow-lg dark:hover:shadow-lg transition-shadow duration-300"
+          className="flex flex-col items-center border border-blue-600 dark:border-white rounded-lg p-6 hover:shadow-lg dark:hover:shadow-lg transition-shadow duration-300"
         >
           <div className="text-gray-700 dark:text-gray-300 text-3xl md:text-4xl mb-4">
             <heading.icon />

@@ -28,6 +28,7 @@ export const dashboardFormIdTypes = [
     value: "Mobile_No",
   },
 ];
+
 export const dashboardSummaryHeadings = [
   {
     name: "Income summary",
@@ -79,6 +80,7 @@ export const dashboardSummaryHeadings = [
     icon: FaBitcoin,
   },
 ];
+
 export const adminSummaryHeadings = [
   {
     name: "Users",
@@ -114,12 +116,19 @@ export const adminSummaryHeadings = [
     ],
   },
 ];
+
 export const headerNavItemsAdmin = [
   { name: "Run Offer & Notice Board ", href: "/admin/run-offer" },
   { name: "Add User", href: "/signup" },
+  {
+    name: "Logs",
+    href: "/admin/logs",
+  },
 ];
+
 export const headerNavItemsDashboard = [
   { name: "Login", href: "/login" },
   { name: "Add", href: "/signup" },
 ];
+
 export const ServiceAndPricingItems = ["Sign Copy", "Server Copy", "NID Maker"];
