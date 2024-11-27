@@ -8,7 +8,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { orderPendingDataDemo } from "@/lib/demoData";
-import { formatRelativeTime } from "@/lib/helperFunction";
+import PendingTimeShower from "./PendingTimeShower";
+import { Button } from "./ui/button";
 export default function AdminPendingOrderTable() {
   return (
     <div className="rounded-md border text-center">
@@ -23,6 +24,7 @@ export default function AdminPendingOrderTable() {
             <TableHead className="text-center">Pending Time</TableHead>
             <TableHead className="text-center">User WhatsApp</TableHead>
             <TableHead className="text-center">User Name</TableHead>
+            <TableHead className="text-center">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody className="text-nowrap">
@@ -34,10 +36,18 @@ export default function AdminPendingOrderTable() {
               <TableCell>{user.orderTime}</TableCell>
               <TableCell>{user.status}</TableCell>
               <TableCell>
-                {formatRelativeTime(new Date(user.orderTime))}
+                <PendingTimeShower time={user.orderTime} />
               </TableCell>
               <TableCell>{user.formNumber}</TableCell>
               <TableCell>{user.username}</TableCell>
+              <TableCell>
+                <Button variant="default" size="sm" className="mr-2">
+                  Done
+                </Button>
+                <Button variant="destructive" size="sm" className="mr-2">
+                  Delete
+                </Button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
