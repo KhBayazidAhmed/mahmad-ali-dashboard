@@ -51,7 +51,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         const matchedUser = users.find(
           (user) => user.email === credentials?.email
         );
-
         if (matchedUser) {
           return matchedUser;
         }

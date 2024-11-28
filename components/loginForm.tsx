@@ -1,14 +1,17 @@
 "use client";
 import { signIn } from "next-auth/react";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
+import { Button } from "./ui/button";
+import { Loader2 } from "lucide-react";
 
 export default function LoginForm() {
+  const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setPending(true);
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
@@ -18,7 +21,7 @@ export default function LoginForm() {
       password,
       redirectTo: "/",
     });
-
+    setPending(false);
     if (result?.error) {
       // Handle the error (e.g., show a toast, redirect, etc.)
       setError(result.error);
@@ -53,9 +56,16 @@ export default function LoginForm() {
           {error}
         </div>
       )}
-      <Button type="submit" className="w-full">
-        Sign in
-      </Button>
+      {pending ? (
+        <Button disabled className="w-full">
+          <Loader2 className="animate-spin" />
+          Please wait
+        </Button>
+      ) : (
+        <Button type="submit" className="w-full">
+          Sign in
+        </Button>
+      )}
     </form>
   );
 }
