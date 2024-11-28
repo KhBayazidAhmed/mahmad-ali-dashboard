@@ -1,23 +1,8 @@
-import Link from "next/link";
-
-export default function Home() {
-  return (
-    <div className="flex flex-col h-screen justify-center items-center">
-      <h1> mohmmad ali dashboard</h1>
-      <Link
-        className="text-blue-600 hover:text-blue-800 underline"
-        href="/admin"
-      >
-        {" "}
-        Dashboard Admin
-      </Link>
-      <Link
-        className="text-blue-600 hover:text-blue-800 underline"
-        href="/dashboard"
-      >
-        {" "}
-        Dashboard
-      </Link>
-    </div>
-  );
+import { auth } from "@/auth/authSetup";
+import { redirect } from "next/navigation";
+export default async function Home() {
+  const session = await auth();
+  if (!session) redirect("/login");
+  if (session.user.role === "admin") redirect("/admin");
+  redirect("/dashboard");
 }

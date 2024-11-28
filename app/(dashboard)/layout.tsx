@@ -1,11 +1,19 @@
+import { auth } from "@/auth/authSetup";
 import Header from "@/components/Header";
 import { headerNavItemsDashboard } from "@/lib/config";
+import { redirect } from "next/navigation";
 
-export default function layout({ children }: { children: React.ReactNode }) {
+export default async function layout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const session = await auth();
+  if (!session) redirect("/login");
   return (
-    <div>
+    <main>
       <Header items={headerNavItemsDashboard} />
       {children}
-    </div>
+    </main>
   );
 }
