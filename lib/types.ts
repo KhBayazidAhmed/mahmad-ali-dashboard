@@ -2,10 +2,7 @@ export interface NavItem {
   name: string;
   href: string;
 }
-export interface HeaderNavItemsProps {
-  setIsOpen: (isOpen: boolean) => void;
-  items: NavItem[];
-}
+
 export type Log = {
   id: number;
   message: string;

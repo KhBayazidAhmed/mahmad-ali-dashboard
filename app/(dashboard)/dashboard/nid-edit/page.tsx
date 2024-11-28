@@ -5,9 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Textarea } from "@/components/ui/textarea";
 import { MdBloodtype } from "react-icons/md";
-
 import {
   Select,
   SelectContent,
@@ -23,6 +21,7 @@ import {
   SignatureIcon,
   User2Icon,
 } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function ResponsiveForm() {
   const [images, setImages] = useState<string[]>([]);
@@ -119,6 +118,14 @@ export default function ResponsiveForm() {
               <HomeIcon />
             </Label>
             <Input id="option-two" placeholder="Enter text" />
+          </div>
+        </div>
+        <div className="flex flex-col gap-4">
+          <div className="border rounded flex flex-col  items-center justify-center gap-2 p-4">
+            <Label htmlFor="textarea-1">
+              <HomeIcon />{" "}
+            </Label>
+            <Textarea id="textarea-1" placeholder="Enter long text here" />
           </div>
         </div>
         {/* home Blood Group */}

@@ -17,13 +17,13 @@ import { NavItem } from "@/lib/types";
 
 export default function Header({ items }: { items: NavItem[] }) {
   const [isOpen, setIsOpen] = useState(false);
-
   return (
     <header className="border-b">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <Link href="/admin" className="text-xl font-bold">
-          Dashboard
+        <Link href={items[0].href} className="text-xl font-bold">
+          {items[0].name}
         </Link>
+
         <nav className="hidden md:flex items-center space-x-4">
           <HeaderNavItems items={items} setIsOpen={setIsOpen} />
           <ModeToggle />
