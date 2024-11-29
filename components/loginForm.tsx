@@ -18,7 +18,10 @@ export default function LoginForm() {
       email: formData.get("email") as string,
       password: formData.get("password") as string,
     });
-    setPending(false);
+    if (searchParams.get("error")) {
+      setPending(false);
+      return;
+    }
   };
 
   return (

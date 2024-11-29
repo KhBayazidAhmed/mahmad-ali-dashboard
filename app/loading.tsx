@@ -7,7 +7,7 @@ export default function loading() {
         disabled
       >
         <svg
-          className="animate-spin h-6 w-6 text-white"
+          className="animate-spin h-5 w-5 mr-3 text-white"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
         >
