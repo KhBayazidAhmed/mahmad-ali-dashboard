@@ -1,32 +1,24 @@
 "use client";
-import { signIn } from "next-auth/react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useState } from "react";
+import { signIn } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 import { Button } from "./ui/button";
 import { Loader2 } from "lucide-react";
+import { useState } from "react";
 
 export default function LoginForm() {
-  const [pending, setPending] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const searchParams = useSearchParams();
+  const [pending, setPending] = useState<boolean>();
+  const handleSubmit = async (event: React.FormEvent) => {
     setPending(true);
-    const formData = new FormData(e.currentTarget);
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
-
-    const result = await signIn("credentials", {
-      email,
-      password,
-      redirectTo: "/",
+    event.preventDefault();
+    const formData = new FormData(event.target as HTMLFormElement);
+    await signIn("credentials", {
+      email: formData.get("email") as string,
+      password: formData.get("password") as string,
     });
     setPending(false);
-    if (result?.error) {
-      // Handle the error (e.g., show a toast, redirect, etc.)
-      setError(result.error);
-      return;
-    }
   };
 
   return (
@@ -51,10 +43,8 @@ export default function LoginForm() {
           required
         />
       </div>
-      {error && (
-        <div className="flex items-center justify-center text-sm text-red-500">
-          {error}
-        </div>
+      {searchParams.get("error") && (
+        <p className="text-red-500">{searchParams.get("code")}</p>
       )}
       {pending ? (
         <Button disabled className="w-full">

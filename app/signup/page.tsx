@@ -1,7 +1,5 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+
 import {
   Card,
   CardContent,
@@ -10,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import SignUpForm from "@/components/SignUpForm";
 
 export default function Signup() {
   return (
@@ -24,28 +23,7 @@ export default function Signup() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="name">Full Name</Label>
-              <Input id="name" type="text" placeholder="Your Name" required />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="email">Email address</Label>
-              <Input id="email" type="email" placeholder="Email" required />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                placeholder="Password"
-                type="password"
-                required
-              />
-            </div>
-            <Button type="submit" className="w-full">
-              Sign up
-            </Button>
-          </form>
+          <SignUpForm />
         </CardContent>
         <CardFooter className="flex justify-center">
           <p className="text-sm text-muted-foreground">

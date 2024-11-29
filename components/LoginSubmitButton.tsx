@@ -6,9 +6,8 @@ import { Loader2 } from "lucide-react";
 
 export default function LoginSubmitButton() {
   const { pending } = useFormStatus();
-  console.log(pending);
   return pending ? (
-    <Button disabled>
+    <Button disabled className="w-full">
       <Loader2 className="animate-spin" />
       Please wait
     </Button>
