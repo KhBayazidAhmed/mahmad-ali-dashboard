@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function DashboardNotice() {
   return (
     <div className="my-3 bg-gray-100 dark:bg-gray-800 bg-gradient-to-r from-[rgba(255,255,255,1)] via-[rgba(255,255,255,0)] to-[rgba(255,255,255,1)] dark:from-[#0a0a0b] dark:via-[rgba(0,0,0,0)] dark:to-[#0a0a0b] py-2 overflow-hidden">
