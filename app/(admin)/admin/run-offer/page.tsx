@@ -1,17 +1,33 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { ServiceAndPricingItems } from "@/lib/config";
-import { noticeDemo, offersDemo } from "@/lib/demoData";
+import { offersDemo } from "@/lib/demoData";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import NoticeForm from "@/components/admin/NoticeForm";
+import { revalidatePath, revalidateTag, unstable_cache } from "next/cache";
+import NoticeModel from "@/lib/db/models/Notice.Model";
+import dbConnect from "@/lib/db/connection";
+import NoticeRunningFormSubmit from "@/components/admin/NoticeRunningFormSubmit";
+type Notice = {
+  _id: string;
+  title: string;
+  running: boolean;
+  content: string;
+};
+const getAllNotices = unstable_cache(async () => {
+  await dbConnect();
+  const notices = await NoticeModel.find();
 
-export default function Page() {
+  return notices;
+}, ["all notices"]);
+export default async function Page() {
+  const notices = await getAllNotices();
   return (
     <div className="p-6 bg-background flex flex-wrap justify-around gap-6">
       <div className="w-full sm:w-1/2 lg:w-1/3 space-y-6">
@@ -62,30 +78,34 @@ export default function Page() {
             Add New Notice
           </h3>
 
-          <div className="space-y-4">
-            <Input type="text" placeholder="Notice Title" />
-            <Textarea placeholder="Notice Content" />
-            <Button variant="secondary" className="w-full">
-              Add Offer
-            </Button>
-          </div>
+          <NoticeForm />
         </div>
 
         <Accordion type="single" collapsible className="w-full">
-          {noticeDemo.map((notice, index) => (
-            <AccordionItem value={notice.name} key={index}>
+          {notices.map((notice: Notice, index) => (
+            <AccordionItem value={notice._id.toString()} key={index}>
               <AccordionTrigger
                 className={`${notice.running && "text-red-600"}`}
               >
-                {notice.name} {notice.running && "notice is running"}
+                {notice.title} {notice.running && "notice is running"}
               </AccordionTrigger>
               <AccordionContent>
-                <p className="text-sm">
-                  {notice.content}
-                  <Button variant="default" className="w-full my-3">
-                    {notice.running ? "End" : "Start"}
-                  </Button>
-                </p>
+                <form
+                  action={async () => {
+                    "use server";
+                    await dbConnect();
+                    await NoticeModel.findByIdAndUpdate(notice._id.toString(), {
+                      running: !notice.running,
+                    });
+                    revalidateTag("notices");
+                    revalidatePath("/admin/run-offer");
+                  }}
+                >
+                  <p className="text-sm">
+                    {notice.content}
+                    <NoticeRunningFormSubmit running={notice.running} />
+                  </p>
+                </form>
               </AccordionContent>
             </AccordionItem>
           ))}

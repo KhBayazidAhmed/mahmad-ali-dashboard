@@ -1,15 +1,7 @@
-import React from "react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { orderPendingDataDemo } from "@/lib/demoData";
-import PendingTimeShower from "./PendingTimeShower";
-import { Button } from "../ui/button";
+import { Table, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import AdminOrderPendingTableData from "./AdminOrderPendingTableData";
+import { Suspense } from "react";
+import AdminTableDataLoadingSkeleton from "./AdminTableDataLoadingSkeleton";
 
 export default function AdminPendingOrderTable() {
   return (
@@ -28,30 +20,9 @@ export default function AdminPendingOrderTable() {
             <TableHead className="text-center">Action</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody className="text-nowrap">
-          {orderPendingDataDemo.map((user, index) => (
-            <TableRow key={index}>
-              <TableCell>{user.id}</TableCell>
-              <TableCell>{user.formNumber}</TableCell>
-              <TableCell>NID Copy</TableCell>
-              <TableCell>{user.orderTime}</TableCell>
-              <TableCell>{user.status}</TableCell>
-              <TableCell>
-                <PendingTimeShower time={user.orderTime} />
-              </TableCell>
-              <TableCell>{user.formNumber}</TableCell>
-              <TableCell>{user.username}</TableCell>
-              <TableCell>
-                <Button variant="default" size="sm" className="mr-2">
-                  Done
-                </Button>
-                <Button variant="destructive" size="sm" className="mr-2">
-                  Delete
-                </Button>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
+        <Suspense fallback={<AdminTableDataLoadingSkeleton />}>
+          <AdminOrderPendingTableData />
+        </Suspense>
       </Table>
     </div>
   );

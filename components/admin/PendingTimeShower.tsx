@@ -1,22 +1,27 @@
 "use client";
+
 import { formatRelativeTime } from "@/lib/helperFunction";
 import { useEffect, useState } from "react";
 
 export default function PendingTimeShower({ time }: { time: string }) {
-  const [timeShower, setTimeShower] = useState(
+  const [relativeTime, setRelativeTime] = useState<string>(() =>
     formatRelativeTime(new Date(time))
   );
 
   useEffect(() => {
-    const updateTime = () => {
-      setTimeShower(formatRelativeTime(new Date(time)));
+    const updateRelativeTime = () => {
+      setRelativeTime(formatRelativeTime(new Date(time)));
     };
 
-    updateTime(); // Update immediately on mount
-    const interval = setInterval(updateTime, 1000);
+    // Update immediately on mount
+    updateRelativeTime();
 
-    return () => clearInterval(interval); // Cleanup interval on unmount
-  }, [time]); // Re-run effect if `time` changes
+    // Set interval to update every second
+    const intervalId = setInterval(updateRelativeTime, 1000);
 
-  return <div>{timeShower}</div>;
+    // Cleanup interval on component unmount
+    return () => clearInterval(intervalId);
+  }, [time]);
+
+  return <div>{relativeTime}</div>;
 }

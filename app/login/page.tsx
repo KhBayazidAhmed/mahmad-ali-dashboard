@@ -14,7 +14,10 @@ import { redirect } from "next/navigation";
 export default async function Login() {
   const session = await auth();
   if (session) {
-    const redirectUrl = session.user.role === "admin" ? "/admin" : "/dashboard";
+    const redirectUrl =
+      session.user.role === "admin"
+        ? "/admin"
+        : `/dashboard/${session.user.id}`;
     return redirect(redirectUrl);
   }
   return (

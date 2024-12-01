@@ -41,23 +41,29 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         password: {},
       },
       authorize: async (credentials) => {
-        await dbConnect();
-        const user = await User.findOne({ email: credentials?.email });
-        if (!user) {
-          throw new NoUserFoundLoginError();
-        }
-        const isPasswordValid = await bcrypt.compare(
-          credentials?.password as string,
-          user.password
-        );
-        if (!isPasswordValid) {
+        console.log("auth check");
+        try {
+          await dbConnect();
+          const user = await User.findOne({ email: credentials?.email });
+          if (!user) {
+            throw new NoUserFoundLoginError();
+          }
+          const isPasswordValid = await bcrypt.compare(
+            credentials?.password as string,
+            user.password
+          );
+          if (!isPasswordValid) {
+            throw new InvalidLoginError();
+          }
+          return {
+            id: user.id,
+            email: user.email,
+            role: user.role,
+          };
+        } catch (error) {
+          console.error(error);
           throw new InvalidLoginError();
         }
-        return {
-          id: user.id,
-          email: user.email,
-          role: user.role,
-        };
       },
     }),
   ],

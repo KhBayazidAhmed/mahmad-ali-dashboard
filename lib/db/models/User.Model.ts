@@ -25,6 +25,12 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: "user",
     },
+    orders: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Order",
+      },
+    ],
   },
   {
     timestamps: true,

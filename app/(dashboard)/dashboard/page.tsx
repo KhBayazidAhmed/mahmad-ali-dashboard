@@ -1,19 +1,8 @@
-import DashboardSummarySection from "@/components/dashboard/DashboardSummarySection";
-import DashboardFormSection from "@/components/dashboard/DashboardFormSection";
-import DashboardOrderData from "@/components/dashboard/DashboardOrderData";
-import DashboardNotice from "@/components/dashboard/DashboardNotice";
+import { auth } from "@/auth/authSetup";
+import { redirect } from "next/navigation";
 
-export default function Page() {
-  return (
-    <div className="container mx-auto mt-8 px-4">
-      <DashboardNotice />
-      <DashboardSummarySection />
-      <div className="flex  flex-col lg:flex-row gap-6 mt-8">
-        <DashboardFormSection />
-        <div className=" flex-1 p-y-6">
-          <DashboardOrderData />
-        </div>
-      </div>
-    </div>
-  );
+export default async function page() {
+  const session = await auth();
+  if (!session) redirect("/login");
+  redirect(`/dashboard/${session.user.id}`);
 }

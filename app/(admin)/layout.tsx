@@ -9,7 +9,9 @@ export default async function layout({
   children: React.ReactNode;
 }) {
   const session = await auth();
-  if (!session || session.user.role !== "admin") return redirect("/login");
+  if (!session) redirect("/login");
+  if (session.user.role !== "admin")
+    return redirect(`/dashboard/${session.user.id}`);
   return (
     <div className="container mx-auto">
       <Header items={headerNavItemsAdmin} />

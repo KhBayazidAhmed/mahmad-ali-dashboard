@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+
 import {
   Select,
   SelectTrigger,
@@ -13,12 +14,37 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { dashboardFormIdTypes } from "@/lib/config";
+import { useActionState, useEffect } from "react";
+import { createOrder } from "@/actions/order";
+import { Loader2 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 export default function DashboardFormSection() {
+  const [state, formAction, isPending] = useActionState(createOrder, null);
+  const { toast } = useToast();
+
+  useEffect(() => {
+    if (state) {
+      if (state.success) {
+        toast({
+          title: "Success",
+          description: state.message,
+          variant: "default",
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: state.message || "Something went wrong!",
+          variant: "destructive",
+        });
+      }
+    }
+  }, [state, toast]);
+
   return (
-    <Card className=" min-w-80 shadow-lg border border-gray-200 dark:border-gray-700">
+    <Card className="min-w-80 shadow-lg border border-gray-200 dark:border-gray-700">
       <CardContent className="p-6 space-y-6">
-        <form className="space-y-6">
+        <form action={formAction} className="space-y-6">
           {/* Type Selection */}
           <div className="space-y-2">
             <Label
@@ -27,7 +53,7 @@ export default function DashboardFormSection() {
             >
               Select Type
             </Label>
-            <Select>
+            <Select name="idType">
               <SelectTrigger className="w-full border-2 border-gray-200 dark:border-gray-700">
                 <SelectValue placeholder="Choose a type" />
               </SelectTrigger>
@@ -56,6 +82,7 @@ export default function DashboardFormSection() {
             <Input
               type="number"
               id="idNumber"
+              name="idNumber"
               placeholder="Enter ID number"
               className="w-full border-2 border-gray-200 dark:border-gray-700"
               required
@@ -73,11 +100,13 @@ export default function DashboardFormSection() {
             <Input
               type="text"
               id="name"
+              name="name"
               placeholder="Enter name"
               className="w-full border-2 border-gray-200 dark:border-gray-700"
               required
             />
           </div>
+
           {/* Note Input */}
           <div className="space-y-2">
             <Label
@@ -87,23 +116,29 @@ export default function DashboardFormSection() {
               Note
             </Label>
             <Textarea
+              name="note"
+              id="note"
               className="w-full border-2 border-gray-200 dark:border-gray-700"
               placeholder="Type your message here."
             />
           </div>
+
+          {/* Copy Type Radio Group */}
           <div className="space-y-4">
             <Label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
               Select Copy Type
             </Label>
             <RadioGroup
               defaultValue="sign-copy"
-              className="flex justify-between items-center "
+              id="copy-type"
+              name="copyType"
+              className="flex justify-between items-center"
             >
               {/* Sign Copy Option */}
               <div className="flex items-center gap-2">
                 <RadioGroupItem
                   id="sign-copy"
-                  value="sign-copy"
+                  value="sign_copy"
                   className="form-radio text-blue-600 focus:ring-blue-500 dark:text-blue-400 dark:focus:ring-blue-300"
                 />
                 <Label
@@ -113,12 +148,13 @@ export default function DashboardFormSection() {
                   Sign Copy
                 </Label>
               </div>
+
               {/* Server Copy Option */}
-              <div className="flex items-center justify-center  gap-2">
+              <div className="flex items-center justify-center gap-2">
                 <RadioGroupItem
                   id="server-copy"
-                  value="server-copy"
-                  className="form-radio  text-blue-600 focus:ring-blue-500 dark:text-blue-400 dark:focus:ring-blue-300"
+                  value="server_copy"
+                  className="form-radio text-blue-600 focus:ring-blue-500 dark:text-blue-400 dark:focus:ring-blue-300"
                 />
                 <Label
                   className="cursor-pointer text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
@@ -131,8 +167,9 @@ export default function DashboardFormSection() {
           </div>
 
           {/* Submit Button */}
-          <div>
-            <Button className="w-full" variant="default">
+          <div className="flex justify-end">
+            <Button type="submit" disabled={isPending}>
+              {isPending && <Loader2 className="animate-spin mr-2" />}
               Submit
             </Button>
           </div>

@@ -1,17 +1,14 @@
-import { FaDownload, FaRegEye, FaEdit } from "react-icons/fa";
+import { Table, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { orderDataDemo } from "@/lib/demoData";
-import Link from "next/link";
-export default function DashboardOrderData() {
+import DashboardOrderDataTable from "./DashboardOrderDataTable";
+import { Suspense } from "react";
+import DashboardOrderLoading from "./DashboardOrderLoading";
+
+export default async function DashboardOrderData({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   return (
     <div className="rounded-md border text-center">
       <Table className="text-center">
@@ -28,45 +25,9 @@ export default function DashboardOrderData() {
             <TableHead className="text-center">NID Copy</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody className="text-nowrap">
-          {orderDataDemo.map((user, index) => (
-            <TableRow key={index}>
-              <TableCell>{user.id}</TableCell>
-              <TableCell>{user.formNumber}</TableCell>
-              <TableCell>{user.deliveryTime}</TableCell>
-              <TableCell>{user.status}</TableCell>
-              <TableCell>{user.deliveryTime}</TableCell>
-              <TableCell>
-                <Button variant="outline" size="sm" className="mr-2">
-                  <FaDownload />
-                </Button>
-                <Button variant="outline" size="sm" className="mr-2">
-                  <FaRegEye />
-                </Button>
-              </TableCell>
-              <TableCell>
-                <Button variant="outline" size="sm" className="mr-2">
-                  <FaDownload />
-                </Button>
-                <Button variant="outline" size="sm" className="mr-2">
-                  <FaRegEye />
-                </Button>
-                <Button asChild variant="outline" size="sm" className="mr-2">
-                  <Link href="/dashboard/nid-edit">
-                    <FaEdit />
-                  </Link>
-                </Button>
-              </TableCell>
-            </TableRow>
-          ))}
-          <TableRow>
-            <TableCell colSpan={7}>
-              <Button variant="outline" size="sm">
-                View All
-              </Button>
-            </TableCell>
-          </TableRow>
-        </TableBody>
+        <Suspense fallback={<DashboardOrderLoading />}>
+          <DashboardOrderDataTable params={params} />
+        </Suspense>
       </Table>
     </div>
   );
