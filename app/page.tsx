@@ -1,6 +1,13 @@
-import React from "react";
+import { auth } from "@/auth/authSetup";
+import { redirect } from "next/navigation";
 
-const DomainSuspended = () => {
+const DomainSuspended = async () => {
+  const session = await auth();
+  if (session) {
+    if (session.user.role === "admin") redirect("/admin");
+    redirect(`/dashboard/${session.user.id}`);
+  }
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 text-gray-800">
       <div className="text-center">
