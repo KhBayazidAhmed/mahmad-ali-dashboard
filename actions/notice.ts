@@ -13,7 +13,7 @@ export async function createNotice(initial: unknown, formData: FormData) {
     });
     await newNotice.save();
     revalidateTag("all notices");
-    revalidatePath("/admin/run-offer");
+    revalidatePath("/ma/run-offer");
     return {
       success: true,
       message: "Notice created successfully",

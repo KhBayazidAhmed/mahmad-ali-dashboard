@@ -65,7 +65,7 @@ export const dashboardSummaryHeadings = [
         value: "10",
       },
     ],
-    href: "/admin/total-income",
+    href: "/ma/total-income",
     icon: FaAddressCard,
   },
   {
@@ -76,7 +76,7 @@ export const dashboardSummaryHeadings = [
         value: "100",
       },
     ],
-    href: "/admin/demo-heading",
+    href: "/ma/demo-heading",
     icon: FaBitcoin,
   },
 ];
@@ -84,7 +84,7 @@ export const dashboardSummaryHeadings = [
 export const adminSummaryHeadings = [
   {
     name: "Users",
-    href: "/admin/users",
+    href: "/ma/users",
     icon: FaUsers,
     data: [
       {
@@ -95,7 +95,7 @@ export const adminSummaryHeadings = [
   },
   {
     name: "Total Income",
-    href: "/admin/total-income",
+    href: "/ma/total-income",
     icon: FaDollarSign,
     data: [
       {
@@ -106,7 +106,7 @@ export const adminSummaryHeadings = [
   },
   {
     name: "Analytics",
-    href: "/admin/Analytics",
+    href: "/ma/Analytics",
     icon: FaChartBar,
     data: [
       {
@@ -120,13 +120,13 @@ export const adminSummaryHeadings = [
 export const headerNavItemsAdmin = [
   {
     name: "Dashboard",
-    href: "/admin",
+    href: "/ma",
   },
-  { name: "Run Offer & Notice Board ", href: "/admin/run-offer" },
+  { name: "Run Offer & Notice Board ", href: "/ma/run-offer" },
   { name: "Add User", href: "/signup" },
   {
     name: "Logs",
-    href: "/admin/logs",
+    href: "/ma/logs",
   },
 ];
 

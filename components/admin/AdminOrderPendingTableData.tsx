@@ -60,7 +60,7 @@ export default async function AdminOrderPendingTableData() {
                   { _id: user._id },
                   { $set: { status: "done" } }
                 );
-                revalidatePath("/admin");
+                revalidatePath("/ma");
               }}
             >
               <AdminPendingDataSubmitButton name={"Done"} />
@@ -71,7 +71,7 @@ export default async function AdminOrderPendingTableData() {
                 await dbConnect();
                 await OrderModel.deleteOne({ _id: user._id });
                 revalidatePath(`/dashboard/${user.user._id}`);
-                revalidatePath("/admin");
+                revalidatePath("/ma");
               }}
             >
               <AdminPendingDataSubmitButton name={"Delete"} />

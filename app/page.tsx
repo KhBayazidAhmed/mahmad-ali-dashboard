@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 const DomainSuspended = async () => {
   const session = await auth();
   if (session) {
-    if (session.user.role === "admin") redirect("/admin");
+    if (session.user.role === "admin") redirect("/ma");
     redirect(`/dashboard/${session.user.id}`);
   }
 

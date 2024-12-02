@@ -97,7 +97,7 @@ export default async function Page() {
                         { running: !notice.running }
                       );
                       revalidateTag("notices");
-                      revalidatePath("/admin/run-offer");
+                      revalidatePath("/ma/run-offer");
                     }}
                   >
                     <p className="text-sm">
@@ -113,7 +113,7 @@ export default async function Page() {
                         notice._id.toString()
                       );
                       revalidateTag("notices");
-                      revalidatePath("/admin/run-offer");
+                      revalidatePath("/ma/run-offer");
                     }}
                   >
                     <p className="text-sm">
