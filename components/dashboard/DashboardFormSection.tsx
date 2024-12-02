@@ -103,7 +103,6 @@ export default function DashboardFormSection() {
               name="name"
               placeholder="Enter name"
               className="w-full border-2 border-gray-200 dark:border-gray-700"
-              required
             />
           </div>
 

@@ -2,12 +2,14 @@ import DashboardSummarySection from "@/components/dashboard/DashboardSummarySect
 import DashboardFormSection from "@/components/dashboard/DashboardFormSection";
 import DashboardOrderData from "@/components/dashboard/DashboardOrderData";
 import DashboardNotice from "@/components/dashboard/DashboardNotice";
+import AdminTimeShowing from "@/components/admin/AdminTimeShowing";
 
 export default function Page({ params }: { params: Promise<{ id: string }> }) {
   return (
     <div className="container mx-auto mt-8 px-4">
       <DashboardNotice />
       <DashboardSummarySection />
+      <AdminTimeShowing />
       <div className="flex  flex-col lg:flex-row gap-6 mt-8">
         <DashboardFormSection />
         <div className=" flex-1 p-y-6">
