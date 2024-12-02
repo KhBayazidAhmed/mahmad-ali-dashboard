@@ -42,11 +42,18 @@ export default async function DashboardOrderDataTable({
         <TableRow key={index}>
           <TableCell>{index + 1}</TableCell>
           <TableCell>{user.idNumber}</TableCell>
-          <TableCell>{new Date(user.orderTime).toLocaleString()}</TableCell>
+          <TableCell>
+            {new Date(user.orderTime).toLocaleString("en-US", {
+              timeZone: "Asia/Dhaka",
+            })}
+          </TableCell>
           <TableCell>{user.status}</TableCell>
+          <TableCell> - </TableCell>
           <TableCell>
             {user.deliveryTime
-              ? new Date(user.deliveryTime).toLocaleString()
+              ? new Date(user.deliveryTime).toLocaleString("en-US", {
+                  timeZone: "Asia/Dhaka",
+                })
               : "Not Delivered"}
           </TableCell>
           <TableCell>

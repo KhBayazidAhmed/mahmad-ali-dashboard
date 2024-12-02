@@ -36,10 +36,18 @@ export default async function AdminOrderPendingTableData() {
           <TableCell>{index + 1}</TableCell>
           <TableCell>{user.idNumber}</TableCell>
           <TableCell>NID Copy</TableCell>
-          <TableCell>{user.orderTime.toLocaleString()}</TableCell>
+          <TableCell>
+            {user.orderTime.toLocaleString("en-US", {
+              timeZone: "Asia/Dhaka",
+            })}
+          </TableCell>
           <TableCell>{user.status}</TableCell>
           <TableCell>
-            <PendingTimeShower time={user.orderTime.toLocaleString()} />
+            <PendingTimeShower
+              time={user.orderTime.toLocaleString("en-US", {
+                timeZone: "Asia/Dhaka",
+              })}
+            />
           </TableCell>
           <TableCell>{user.user.whatsapp || "-"}</TableCell>
           <TableCell>{user.user.name}</TableCell>

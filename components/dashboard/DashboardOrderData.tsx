@@ -18,6 +18,7 @@ export default async function DashboardOrderData({
             <TableHead className="text-center">Number </TableHead>
             <TableHead className="text-center">Order Time </TableHead>
             <TableHead className="text-center">Status</TableHead>
+            <TableHead className="text-center">Problem </TableHead>
             <TableHead className="text-center">Delivery Time</TableHead>
             <TableHead className="text-center">
               Sign Copy / Server Copy
