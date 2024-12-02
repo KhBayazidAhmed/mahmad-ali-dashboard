@@ -14,6 +14,7 @@ import { revalidatePath, revalidateTag, unstable_cache } from "next/cache";
 import NoticeModel from "@/lib/db/models/Notice.Model";
 import dbConnect from "@/lib/db/connection";
 import NoticeRunningFormSubmit from "@/components/admin/NoticeRunningFormSubmit";
+import NoticeDeleteSubmitButton from "@/components/admin/NoticeDeleteSubmitButton";
 type Notice = {
   _id: string;
   title: string;
@@ -104,6 +105,19 @@ export default async function Page() {
                   <p className="text-sm">
                     {notice.content}
                     <NoticeRunningFormSubmit running={notice.running} />
+                  </p>
+                </form>
+                <form
+                  action={async () => {
+                    "use server";
+                    await dbConnect();
+                    await NoticeModel.findByIdAndDelete(notice._id.toString());
+                    revalidateTag("notices");
+                    revalidatePath("/admin/run-offer");
+                  }}
+                >
+                  <p className="text-sm">
+                    <NoticeDeleteSubmitButton />
                   </p>
                 </form>
               </AccordionContent>
