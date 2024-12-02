@@ -80,7 +80,7 @@ export default function DashboardFormSection() {
               Number
             </Label>
             <Input
-              type="number"
+              type="text"
               id="idNumber"
               name="idNumber"
               placeholder="Enter ID number"
