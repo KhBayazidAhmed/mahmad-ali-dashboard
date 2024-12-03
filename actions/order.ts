@@ -47,7 +47,7 @@ export async function createOrder(initial: unknown, formData: FormData) {
       { _id: userId },
       { $push: { orders: newOrder._id } }
     );
-    revalidateTag(userId);
+    revalidateTag(`${userId}-dashboard-order-data`);
     revalidatePath(`/dashboard/${session.user.id}`);
     return {
       success: true,

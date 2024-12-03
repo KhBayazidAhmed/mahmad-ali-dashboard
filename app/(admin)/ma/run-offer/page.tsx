@@ -23,11 +23,15 @@ type Notice = {
   content: string;
 };
 
-const getAllNotices = unstable_cache(async () => {
-  await dbConnect();
-  const notices = await NoticeModel.find();
-  return notices;
-}, ["all notices"]);
+const getAllNotices = unstable_cache(
+  async () => {
+    await dbConnect();
+    const notices = await NoticeModel.find();
+    return notices;
+  },
+  ["all notices"],
+  { revalidate: 10 }
+);
 
 export default async function Page() {
   const notices = await getAllNotices();

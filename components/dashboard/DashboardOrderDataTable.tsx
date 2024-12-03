@@ -33,12 +33,86 @@ export default async function DashboardOrderDataTable({
         .limit(10)) as userOrderData[];
       return orderData;
     },
-    [id]
+    [`${id}-dashboard-order-data`],
+    { revalidate: 10 }
   );
   const orderData = await getOrderData(id);
+  const pending = orderData.filter((order) => order.status === "pending");
+  const completed = orderData.filter((order) => order.status === "done");
   return (
     <TableBody className="text-nowrap">
-      {orderData.map((user, index) => (
+      {pending.map((user, index) => (
+        <TableRow key={index}>
+          <TableCell>{index + 1}</TableCell>
+          <TableCell>{user.idNumber}</TableCell>
+          <TableCell>
+            {new Date(user.orderTime).toLocaleString("en-US", {
+              timeZone: "Asia/Dhaka",
+            })}
+          </TableCell>
+          <TableCell>{user.status}</TableCell>
+          <TableCell> - </TableCell>
+          <TableCell>
+            {user.deliveryTime
+              ? new Date(user.deliveryTime).toLocaleString("en-US", {
+                  timeZone: "Asia/Dhaka",
+                })
+              : "Not Delivered"}
+          </TableCell>
+          <TableCell>
+            <Button
+              disabled={!user.deliveryTime}
+              variant="outline"
+              size="sm"
+              className="mr-2"
+            >
+              <FaDownload />
+            </Button>
+            <Button
+              disabled={!user.deliveryTime}
+              variant="outline"
+              size="sm"
+              className="mr-2"
+            >
+              <FaRegEye />
+            </Button>
+          </TableCell>
+          <TableCell>
+            <Button
+              disabled={!user.deliveryTime}
+              variant="outline"
+              size="sm"
+              className="mr-2"
+            >
+              <FaDownload />
+            </Button>
+            <Button
+              disabled={!user.deliveryTime}
+              variant="outline"
+              size="sm"
+              className="mr-2"
+            >
+              <FaRegEye />
+            </Button>
+            <Button
+              disabled={!user.deliveryTime}
+              variant="outline"
+              size="sm"
+              className="mr-2"
+            >
+              <Link href={`/dashboard/${id}/nid-edit`}>
+                <FaEdit />
+              </Link>
+            </Button>
+          </TableCell>
+        </TableRow>
+      ))}
+      <TableRow className="border-red-500 ">
+        <TableCell colSpan={8} className="text-center">
+          <h1>Completed</h1>
+        </TableCell>
+      </TableRow>
+      {completed.map((user, index) => (
         <TableRow key={index}>
           <TableCell>{index + 1}</TableCell>
           <TableCell>{user.idNumber}</TableCell>

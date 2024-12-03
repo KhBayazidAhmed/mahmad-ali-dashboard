@@ -41,7 +41,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         password: {},
       },
       authorize: async (credentials) => {
-        console.log("auth check");
         try {
           await dbConnect();
           const user = await User.findOne({ email: credentials?.email });
@@ -56,7 +55,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             throw new InvalidLoginError();
           }
           return {
-            id: user.id,
+            id: user.id.toString(),
             email: user.email,
             role: user.role,
           };

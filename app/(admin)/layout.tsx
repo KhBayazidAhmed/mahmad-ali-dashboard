@@ -1,5 +1,6 @@
 import { auth } from "@/auth/authSetup";
 import Header from "@/components/Header";
+import Refresher from "@/components/Refresher";
 import { headerNavItemsAdmin } from "@/lib/config";
 import { redirect } from "next/navigation";
 
@@ -15,6 +16,7 @@ export default async function layout({
   return (
     <div className="container mx-auto">
       <Header items={headerNavItemsAdmin} />
+      <Refresher />
       {children}
     </div>
   );

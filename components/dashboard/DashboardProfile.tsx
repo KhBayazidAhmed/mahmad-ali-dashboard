@@ -15,7 +15,6 @@ export default function DashboardProfile() {
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem>Edit </DropdownMenuItem>
         <DropdownMenuItem onClick={() => signOut()} className="text-red-500">
           Sign out
         </DropdownMenuItem>

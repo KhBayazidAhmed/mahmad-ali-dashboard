@@ -2,7 +2,7 @@ import PendingTimeShower from "./PendingTimeShower";
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
 import OrderModel from "@/lib/db/models/Order.Model";
 import dbConnect from "@/lib/db/connection";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, unstable_cache } from "next/cache";
 import AdminPendingDataSubmitButton from "./AdminPendingDataSubmitButton";
 type adminPendingData = {
   _id: string; // MongoDB ObjectId as a string
@@ -20,18 +20,35 @@ type adminPendingData = {
     whatsapp: string; // WhatsApp number of the user
   };
 };
-
+const adminPendingData = unstable_cache(
+  async () => {
+    await dbConnect();
+    const orders = await OrderModel.find({ status: "pending" })
+      .populate({
+        path: "user",
+        select: "name whatsapp email",
+      })
+      .exec();
+    const data = orders.map((order) => {
+      return {
+        ...order.toObject(),
+        _id: order._id.toString(),
+        user: {
+          ...order.user.toObject(),
+          _id: order.user._id.toString(),
+        },
+      };
+    });
+    return data;
+  },
+  ["adminPendingData"],
+  { revalidate: 10 }
+);
 export default async function AdminOrderPendingTableData() {
-  await dbConnect();
-  const adminPendingData = await OrderModel.find({ status: "pending" })
-    .populate({
-      path: "user",
-      select: "name whatsapp email",
-    })
-    .exec();
+  const adminOrderData = await adminPendingData();
   return (
     <TableBody className="text-nowrap">
-      {adminPendingData.map((user: adminPendingData, index: number) => (
+      {adminOrderData.map((user: adminPendingData, index: number) => (
         <TableRow key={index}>
           <TableCell>{index + 1}</TableCell>
           <TableCell>{user.idNumber}</TableCell>
@@ -57,24 +74,13 @@ export default async function AdminOrderPendingTableData() {
                 "use server";
                 await dbConnect();
                 await OrderModel.updateOne(
-                  { _id: user._id },
-                  { $set: { status: "done" } }
+                  { _id: user._id.toString() },
+                  { $set: { status: "done", deliveryTime: new Date() } }
                 );
                 revalidatePath("/ma");
               }}
             >
               <AdminPendingDataSubmitButton name={"Done"} />
-            </form>
-            <form
-              action={async () => {
-                "use server";
-                await dbConnect();
-                await OrderModel.deleteOne({ _id: user._id });
-                revalidatePath(`/dashboard/${user.user._id}`);
-                revalidatePath("/ma");
-              }}
-            >
-              <AdminPendingDataSubmitButton name={"Delete"} />
             </form>
           </TableCell>
         </TableRow>
