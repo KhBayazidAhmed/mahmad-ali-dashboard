@@ -167,7 +167,7 @@ export default function DashboardFormSection() {
 
           {/* Submit Button */}
           <div className="flex justify-end">
-            <Button type="submit" disabled={isPending}>
+            <Button className="w-full" type="submit" disabled={isPending}>
               {isPending && <Loader2 className="animate-spin mr-2" />}
               Submit
             </Button>

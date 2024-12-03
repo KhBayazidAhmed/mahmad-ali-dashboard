@@ -33,6 +33,7 @@ export const CreateUser = async (initial: unknown, formData: FormData) => {
     const newUser = new User({ name, email, password: hashedPassword });
     await newUser.save();
     // await signIn("credentials", { email, password });
+
     return {
       success: true,
       message: "User created successfully",

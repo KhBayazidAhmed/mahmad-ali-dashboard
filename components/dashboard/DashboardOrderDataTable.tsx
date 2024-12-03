@@ -31,6 +31,7 @@ export default async function DashboardOrderDataTable({
           createdAt: -1,
         })
         .limit(10)) as userOrderData[];
+      console.log("order data called");
       return orderData;
     },
     [`${id}-dashboard-order-data`],
@@ -179,7 +180,7 @@ export default async function DashboardOrderDataTable({
         </TableRow>
       ))}
       <TableRow>
-        <TableCell colSpan={7}>
+        <TableCell colSpan={8}>
           <Button variant="outline" size="sm">
             View All
           </Button>

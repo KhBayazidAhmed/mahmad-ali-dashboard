@@ -4,7 +4,7 @@ import { orderPlaceSchema } from "@/lib/zodSchema/orderPlace";
 import Order from "@/lib/db/models/Order.Model";
 import { auth } from "@/auth/authSetup";
 import { redirect } from "next/navigation";
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 import UserModel from "@/lib/db/models/User.Model";
 export async function createOrder(initial: unknown, formData: FormData) {
   const session = await auth();
@@ -47,7 +47,6 @@ export async function createOrder(initial: unknown, formData: FormData) {
       { _id: userId },
       { $push: { orders: newOrder._id } }
     );
-    revalidateTag(`${userId}-dashboard-order-data`);
     revalidatePath(`/dashboard/${session.user.id}`);
     return {
       success: true,
