@@ -137,4 +137,20 @@ export const headerNavItemsDashboard = [
   },
 ];
 
-export const ServiceAndPricingItems = ["Sign Copy", "Server Copy", "NID Maker"];
+export const ServiceAndPricingItems = [
+  {
+    name: "Signature Copy",
+    price: "signCopyPrice",
+    service: "signCopy",
+  },
+  {
+    name: "Server Copy",
+    price: "serverCopyPrice",
+    service: "serverCopy",
+  },
+  {
+    name: "NID Copy",
+    price: "nidCopyPrice",
+    service: "nidCopy",
+  },
+];

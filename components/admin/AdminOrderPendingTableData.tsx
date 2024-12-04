@@ -61,7 +61,7 @@ export default async function AdminOrderPendingTableData() {
           <TableCell>{user.status}</TableCell>
           <TableCell>
             <PendingTimeShower
-              time={user.orderTime.toLocaleString("en-US", {
+              time={new Date(user.orderTime).toLocaleString("en-US", {
                 timeZone: "Asia/Dhaka",
               })}
             />

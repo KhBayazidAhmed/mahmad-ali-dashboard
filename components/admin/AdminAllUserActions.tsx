@@ -1,14 +1,14 @@
+import { UserProps } from "@/lib/types";
 import AdminAllUserAddMoneyAction from "./AdminAllUserAddMoneyAction";
 import { AdminAllUserEditActions } from "./AdminAllUserEditAction";
 import AdminAllUserWhatsAppAction from "./AdminAllUserWhatsAppAction";
 
-export default function AdminAllUserActions({ userId }: { userId: string }) {
-  console.log(userId);
+export default function AdminAllUserActions({ user }: { user: UserProps }) {
   return (
     <>
-      <AdminAllUserEditActions />
-      <AdminAllUserAddMoneyAction />
-      <AdminAllUserWhatsAppAction />
+      <AdminAllUserEditActions user={user} />
+      <AdminAllUserAddMoneyAction user={user} />
+      <AdminAllUserWhatsAppAction user={user} />
     </>
   );
 }

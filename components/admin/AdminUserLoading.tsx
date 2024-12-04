@@ -8,8 +8,8 @@ import {
 } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AdminAllUserSearch } from "./AdminAllUserSearch";
-import AdminAllUserActions from "./AdminAllUserActions";
 import { AdminAllUserPagination } from "./AdminAllUserPagination";
+import { Button } from "../ui/button";
 
 export function AdminUserLoading() {
   return (
@@ -43,7 +43,7 @@ export function AdminUserLoading() {
             </TableCell>
             <TableCell colSpan={10}>No search</TableCell>
           </TableRow>
-          {Array.from({ length: 5 }).map((_, index) => (
+          {Array.from({ length: 10 }).map((_, index) => (
             <TableRow key={index}>
               <TableCell>
                 <Skeleton className="h-4 w-8 mx-auto" />
@@ -61,7 +61,15 @@ export function AdminUserLoading() {
                 <Skeleton className="h-4 w-16 mx-auto" />
               </TableCell>
               <TableCell>
-                <AdminAllUserActions userId={""} />
+                <Button disabled variant="outline" size="sm" className="mr-2">
+                  Pricing
+                </Button>
+                <Button disabled variant="outline" size="sm" className="mr-2">
+                  Add money
+                </Button>
+                <Button disabled variant="outline" size="sm" className="mr-2">
+                  WhatsApp
+                </Button>
               </TableCell>
             </TableRow>
           ))}

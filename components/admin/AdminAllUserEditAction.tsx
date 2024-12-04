@@ -15,15 +15,21 @@ import { Switch } from "@/components/ui/switch";
 import { ServiceAndPricingItems } from "@/lib/config";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
+import { UserProps } from "@/lib/types";
+import dbConnect from "@/lib/db/connection";
+import UserModel from "@/lib/db/models/User.Model";
+import { revalidatePath, revalidateTag } from "next/cache";
+import UserUpdateSubmitButton from "./UserUpdateSubmitButton";
 
-export function AdminAllUserEditActions() {
+export function AdminAllUserEditActions({ user }: { user: UserProps }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="outline" size="sm" className="mr-2">
-          Edit
+          Pricing
         </Button>
       </DialogTrigger>
+
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Edit profile</DialogTitle>
@@ -31,29 +37,85 @@ export function AdminAllUserEditActions() {
             Make changes to profile here. Click save when you&apos;re done.
           </DialogDescription>
         </DialogHeader>
-        <Card>
-          <CardHeader>
-            <CardTitle>Service Changes and Pricing</CardTitle>
-          </CardHeader>
-          <CardContent className="grid gap-4">
-            {ServiceAndPricingItems.map((heading, index) => (
-              <div
-                key={index}
-                className="flex flex-col space-y-3 rounded-md border p-4 "
-              >
-                <Label className="flex items-center justify-between">
-                  Current price : {10} Taka <Switch />
-                </Label>
-                <div className="flex  items-center flex-row gap-2">
-                  <Input type="number" placeholder={` ${heading} price`} />
+        <form
+          action={async (formData: FormData) => {
+            "use server";
+            try {
+              await dbConnect();
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              const updatedFields: Record<string, any> = Object.fromEntries(
+                formData.entries()
+              );
+
+              // Handle switches and ensure default values
+              ServiceAndPricingItems.forEach((item) => {
+                if (updatedFields[item.service]) {
+                  updatedFields[item.service] =
+                    updatedFields[item.service] === "on";
+                } else {
+                  updatedFields[item.service] = false; // Explicitly set to false
+                }
+
+                if (updatedFields[item.price]) {
+                  updatedFields[item.price] = parseFloat(
+                    updatedFields[item.price]
+                  );
+                }
+              });
+
+              // Update user data in the database
+              await UserModel.updateOne(
+                { _id: user?._id },
+                { $set: updatedFields }
+              );
+              revalidateTag("userData");
+              revalidatePath("/admin/users");
+            } catch (error) {
+              console.error("Failed to update user:", error);
+              throw error;
+            }
+          }}
+          className="grid gap-4 py-4"
+        >
+          <Card>
+            <CardHeader>
+              <CardTitle>Service Changes and Pricing</CardTitle>
+            </CardHeader>
+            <CardContent className="grid gap-4">
+              {ServiceAndPricingItems.map((item, index) => (
+                <div
+                  key={index}
+                  className="flex flex-col space-y-3 rounded-md border p-4 "
+                >
+                  <Label className="flex items-center justify-between">
+                    Current price: {user?.[item.price as keyof UserProps]}
+                    Taka{" "}
+                    <Switch
+                      name={item.service}
+                      defaultChecked={Boolean(
+                        user?.[item.service as keyof UserProps]
+                      )}
+                    />
+                  </Label>
+
+                  <div className="flex items-center flex-row gap-2">
+                    <Input
+                      type="number"
+                      name={item.price}
+                      defaultValue={Number(
+                        user?.[item.price as keyof UserProps]
+                      )} // Set default value for price
+                      placeholder={`${item.name} price`}
+                    />
+                  </div>
                 </div>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
-        <DialogFooter>
-          <Button type="submit">Save changes</Button>
-        </DialogFooter>
+              ))}
+            </CardContent>
+          </Card>
+          <DialogFooter>
+            <UserUpdateSubmitButton />
+          </DialogFooter>
+        </form>
       </DialogContent>
     </Dialog>
   );

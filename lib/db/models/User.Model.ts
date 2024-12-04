@@ -25,6 +25,38 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: "user",
     },
+    whatsappService: {
+      type: Boolean,
+      default: false,
+    },
+    signCopy: {
+      type: Boolean,
+      default: false,
+    },
+    signCopyPrice: {
+      type: Number,
+      default: 5,
+    },
+    nidCopy: {
+      type: Boolean,
+      default: false,
+    },
+    nidCopyPrice: {
+      type: Number,
+      default: 5,
+    },
+    serverCopy: {
+      type: Boolean,
+      default: false,
+    },
+    serverCopyPrice: {
+      type: Number,
+      default: 5,
+    },
+    minimumBalance: {
+      type: Number,
+      default: 100,
+    },
     orders: [
       {
         type: mongoose.Schema.Types.ObjectId,

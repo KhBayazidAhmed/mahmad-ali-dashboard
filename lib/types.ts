@@ -20,3 +20,21 @@ export type AdminAllUserActions = {
   name: string;
   actions: () => void;
 };
+export type UserProps = {
+  _id: string;
+  name: string;
+  email: string;
+  balance: number;
+  role: string;
+  signCopy: boolean;
+  signCopyPrice: number;
+  nidCopy: boolean;
+  nidCopyPrice: number;
+  serverCopy: boolean;
+  serverCopyPrice: number;
+  minimumBalance: number;
+  whatsapp?: string;
+  whatsappService: boolean;
+  createdAt: string;
+  updatedAt: string;
+};
