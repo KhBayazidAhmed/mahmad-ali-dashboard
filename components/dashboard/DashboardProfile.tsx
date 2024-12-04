@@ -8,7 +8,6 @@ import {
 import { signOut, useSession } from "next-auth/react";
 export default function DashboardProfile() {
   const { data: session } = useSession();
-  console.log(session);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
