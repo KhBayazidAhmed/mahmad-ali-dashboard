@@ -13,7 +13,7 @@ import { Label } from "@/components/ui/label";
 import dbConnect from "@/lib/db/connection";
 import UserModel from "@/lib/db/models/User.Model";
 import { UserProps } from "@/lib/types";
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 export default function AdminAllUserAddMoneyAction({
   user,
@@ -38,7 +38,6 @@ export default function AdminAllUserAddMoneyAction({
                 { _id: user._id },
                 { balance: user.balance + Number(amount) }
               );
-              revalidateTag("userData");
               revalidatePath("/admin/users");
             } catch (error) {
               console.log(error);

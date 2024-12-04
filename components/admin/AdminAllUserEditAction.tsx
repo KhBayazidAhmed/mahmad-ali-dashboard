@@ -18,7 +18,7 @@ import { Input } from "../ui/input";
 import { UserProps } from "@/lib/types";
 import dbConnect from "@/lib/db/connection";
 import UserModel from "@/lib/db/models/User.Model";
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 import UserUpdateSubmitButton from "./UserUpdateSubmitButton";
 
 export function AdminAllUserEditActions({ user }: { user: UserProps }) {
@@ -68,7 +68,6 @@ export function AdminAllUserEditActions({ user }: { user: UserProps }) {
                 { _id: user?._id },
                 { $set: updatedFields }
               );
-              revalidateTag("userData");
               revalidatePath("/admin/users");
             } catch (error) {
               console.error("Failed to update user:", error);
