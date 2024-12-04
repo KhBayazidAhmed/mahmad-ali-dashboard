@@ -48,7 +48,7 @@ export default function AdminAllUserWhatsAppAction({
               revalidatePath("/admin/users");
               console.log("WhatsApp updated successfully");
             } catch (error) {
-              console.log(error);
+              console.error(error);
               throw error;
             }
           }}
