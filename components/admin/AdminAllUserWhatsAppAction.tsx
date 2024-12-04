@@ -35,7 +35,6 @@ export default function AdminAllUserWhatsAppAction({
             "use server";
             const number = formData.get("number");
             const whatsappService = formData.get("whatsapp-service");
-
             try {
               await dbConnect();
               await UserModel.findOneAndUpdate(
@@ -46,7 +45,6 @@ export default function AdminAllUserWhatsAppAction({
                 }
               );
               revalidatePath("/admin/users");
-              console.log("WhatsApp updated successfully");
             } catch (error) {
               console.error(error);
               throw error;

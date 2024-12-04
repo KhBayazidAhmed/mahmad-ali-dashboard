@@ -29,21 +29,23 @@ const adminPendingData = unstable_cache(
         select: "name whatsapp email",
       })
       .exec();
-    const data = orders.map((order) => {
-      return {
+
+    const data = orders
+      .filter((order) => order.user) // Filter out invalid orders
+      .map((order) => ({
         ...order.toObject(),
         _id: order._id.toString(),
         user: {
           ...order.user.toObject(),
           _id: order.user._id.toString(),
         },
-      };
-    });
+      }));
     return data;
   },
   ["adminPendingData"],
   { revalidate: 10 }
 );
+
 export default async function AdminOrderPendingTableData() {
   const adminOrderData = await adminPendingData();
   return (
@@ -68,7 +70,7 @@ export default async function AdminOrderPendingTableData() {
           </TableCell>
           <TableCell>{user.user.whatsapp || "-"}</TableCell>
           <TableCell>{user.user.name}</TableCell>
-          <TableCell className="flex justify-end">
+          <TableCell className="flex justify-center">
             <form
               action={async () => {
                 "use server";
