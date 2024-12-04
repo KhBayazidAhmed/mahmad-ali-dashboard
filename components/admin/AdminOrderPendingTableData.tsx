@@ -56,7 +56,7 @@ export default async function AdminOrderPendingTableData() {
           <TableCell>{user.idNumber}</TableCell>
           <TableCell>NID Copy</TableCell>
           <TableCell>
-            {user.orderTime.toLocaleString("en-US", {
+            {new Date(user.orderTime).toLocaleString("en-US", {
               timeZone: "Asia/Dhaka",
             })}
           </TableCell>
