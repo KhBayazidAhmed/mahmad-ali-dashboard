@@ -36,9 +36,6 @@ export default function AdminTableDataLoadingSkeleton() {
             <Button disabled variant="default" size="sm" className="mr-2">
               Done
             </Button>
-            <Button disabled variant="destructive" size="sm" className="mr-2">
-              Delete
-            </Button>
           </TableCell>
         </TableRow>
       ))}

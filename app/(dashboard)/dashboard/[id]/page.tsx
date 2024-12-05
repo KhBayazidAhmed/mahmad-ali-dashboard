@@ -8,7 +8,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
   return (
     <div className="container mx-auto mt-8 px-4">
       <DashboardNotice />
-      <DashboardSummarySection />
+      <DashboardSummarySection params={params} />
       {/* <AdminTimeShowing /> */}
       <div className="flex  flex-col lg:flex-row gap-6 mt-8">
         <DashboardFormSection />
