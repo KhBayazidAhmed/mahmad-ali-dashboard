@@ -3,30 +3,11 @@ import OrderModel from "@/lib/db/models/Order.Model";
 import TransitionModel from "@/lib/db/models/Transition.model";
 import UserModel from "@/lib/db/models/User.Model";
 import Link from "next/link";
+import { Suspense } from "react";
 import { FaUsers, FaDollarSign, FaChartBar } from "react-icons/fa";
 
-async function fetchData() {
-  await dbConnect();
-
-  // Fetch data
-  const totalUsers = await UserModel.countDocuments();
-  const todayIncome = await TransitionModel.countDocuments({
-    createdAt: {
-      $gte: new Date(new Date().setHours(0, 0, 0, 0)), // Today's orders
-    },
-  }); // Replace with dynamic income logic if needed
-  const todayOrders = await OrderModel.countDocuments({
-    createdAt: {
-      $gte: new Date(new Date().setHours(0, 0, 0, 0)), // Today's orders
-    },
-  });
-
-  return { totalUsers, todayIncome, todayOrders };
-}
-
 export default async function SummarySection() {
-  const { totalUsers, todayIncome, todayOrders } = await fetchData();
-
+  // await new Promise((resolve) => setTimeout(resolve, 10000));
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 mb-9 lg:grid-cols-3 gap-6">
       {/* Users Section */}
@@ -41,7 +22,9 @@ export default async function SummarySection() {
           Users
         </div>
         <div className="text-sm md:text-base text-gray-600 dark:text-gray-400">
-          Total Users: <span className="font-medium">{totalUsers}</span>
+          <Suspense fallback={<Loading />}>
+            <TotalUsers />
+          </Suspense>
         </div>
       </Link>
 
@@ -57,7 +40,9 @@ export default async function SummarySection() {
           Total Income
         </div>
         <div className="text-sm md:text-base text-gray-600 dark:text-gray-400">
-          Today Income: <span className="font-medium">{todayIncome}</span>
+          <Suspense fallback={<Loading />}>
+            <TotalIncome />
+          </Suspense>
         </div>
       </Link>
 
@@ -73,9 +58,52 @@ export default async function SummarySection() {
           Analytics
         </div>
         <div className="text-sm md:text-base text-gray-600 dark:text-gray-400">
-          Today Total Orders: <span className="font-medium">{todayOrders}</span>
+          <Suspense fallback={<Loading />}>
+            <TodayOrders />
+          </Suspense>
         </div>
       </Link>
     </div>
+  );
+}
+function Loading() {
+  return <div className="bg-gray-300 dark:bg-gray-600 h-5 w-36 rounded"></div>;
+}
+async function TotalIncome() {
+  await dbConnect();
+
+  const todayIncome = await TransitionModel.countDocuments({
+    createdAt: {
+      $gte: new Date(new Date().setHours(0, 0, 0, 0)), // Today's orders
+    },
+  });
+  return (
+    <>
+      Today Income: <span className="font-medium">{todayIncome}</span>
+    </>
+  );
+}
+async function TodayOrders() {
+  await dbConnect();
+
+  const todayOrders = await OrderModel.countDocuments({
+    createdAt: {
+      $gte: new Date(new Date().setHours(0, 0, 0, 0)), // Today's orders
+    },
+  });
+  return (
+    <>
+      Today Total Orders: <span className="font-medium">{todayOrders}</span>
+    </>
+  );
+}
+async function TotalUsers() {
+  await dbConnect();
+
+  const totalUsers = await UserModel.countDocuments();
+  return (
+    <>
+      Total Users: <span className="font-medium">{totalUsers}</span>
+    </>
   );
 }
