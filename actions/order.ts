@@ -6,6 +6,7 @@ import { auth } from "@/auth/authSetup";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import UserModel from "@/lib/db/models/User.Model";
+import TransitionModel from "@/lib/db/models/Transition.model";
 export async function createOrder(initial: unknown, formData: FormData) {
   const session = await auth();
   if (!session) {
@@ -32,6 +33,37 @@ export async function createOrder(initial: unknown, formData: FormData) {
   }
   try {
     await dbConnect();
+    const user = await UserModel.findById(userId);
+
+    if (!user) throw new Error("User not found!");
+
+    // Determine the price based on the order type
+    let price = 0;
+    switch (copyType) {
+      case "sign_copy":
+        price = user.signCopyPrice;
+        break;
+      case "nidCopy":
+        price = user.nidCopyPrice;
+        break;
+      case "server_copy":
+        price = user.serverCopyPrice;
+        break;
+      default:
+        return {
+          success: false,
+          message: "Invalid order type",
+        };
+    }
+
+    // Ensure the user has sufficient balance
+    if (user.balance - price < user.minimumBalance) {
+      return {
+        success: false,
+        message: "Insufficient balance to process this order.",
+      };
+    }
+
     const newOrder = new Order({
       status: "pending",
       name,
@@ -45,8 +77,19 @@ export async function createOrder(initial: unknown, formData: FormData) {
     await newOrder.save();
     await UserModel.findOneAndUpdate(
       { _id: userId },
-      { $push: { orders: newOrder._id } }
+      {
+        $push: { orders: newOrder._id },
+        $inc: { balance: -price },
+      },
+      { new: true }
     );
+    await TransitionModel.create({
+      userId,
+      description: "Order created ",
+      amount: 5,
+      type: "cashIn",
+    });
+
     revalidatePath(`/dashboard/${session.user.id}`);
     return {
       success: true,

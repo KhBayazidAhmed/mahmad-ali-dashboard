@@ -1,10 +1,4 @@
-import {
-  FaBitcoin,
-  FaDollarSign,
-  FaAddressCard,
-  FaUsers,
-  FaChartBar,
-} from "react-icons/fa";
+import { FaBitcoin, FaDollarSign, FaAddressCard } from "react-icons/fa";
 
 export const dashboardFormIdTypes = [
   {
@@ -78,42 +72,6 @@ export const dashboardSummaryHeadings = [
     ],
     href: "/ma/demo-heading",
     icon: FaBitcoin,
-  },
-];
-
-export const adminSummaryHeadings = [
-  {
-    name: "Users",
-    href: "/ma/users",
-    icon: FaUsers,
-    data: [
-      {
-        name: "Total User",
-        value: "100",
-      },
-    ],
-  },
-  {
-    name: "Total Income",
-    href: "/ma/total-income",
-    icon: FaDollarSign,
-    data: [
-      {
-        name: "Today Income",
-        value: "100",
-      },
-    ],
-  },
-  {
-    name: "Analytics",
-    href: "/ma/Analytics",
-    icon: FaChartBar,
-    data: [
-      {
-        name: "Today Total Order",
-        value: "100",
-      },
-    ],
   },
 ];
 
