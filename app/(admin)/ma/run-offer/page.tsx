@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ServiceAndPricingItems } from "@/lib/config";
-import { offersDemo } from "@/lib/demoData";
+// import { ServiceAndPricingItems } from "@/lib/config";
+// import { offersDemo } from "@/lib/demoData";
 import {
   Accordion,
   AccordionContent,
@@ -15,6 +15,7 @@ import NoticeModel from "@/lib/db/models/Notice.Model";
 import dbConnect from "@/lib/db/connection";
 import NoticeRunningFormSubmit from "@/components/admin/NoticeRunningFormSubmit";
 import NoticeDeleteSubmitButton from "@/components/admin/NoticeDeleteSubmitButton";
+import OfferModel from "@/lib/db/models/Offer.Model";
 
 type Notice = {
   _id: string;
@@ -35,7 +36,7 @@ const getAllNotices = unstable_cache(
 
 export default async function Page() {
   const notices = await getAllNotices();
-
+  const offers = await OfferModel.find();
   return (
     <div className="p-6 bg-background">
       {/* Responsive Grid Layout */}
@@ -45,34 +46,57 @@ export default async function Page() {
           <h3 className="text-lg font-semibold text-muted-foreground">
             Add New Offer
           </h3>
-          <div className="space-y-4">
-            {ServiceAndPricingItems.map((heading, index) => (
-              <div key={index} className="rounded-md border p-4 space-y-3">
-                <Label className="block">Current price: 10 Taka</Label>
-                <Input type="number" placeholder={`${heading} price`} />
-              </div>
-            ))}
-            <Button variant="secondary" className="w-full">
-              Add Offer
-            </Button>
-          </div>
+          <OfferForm />
           {/* Display Offers Section */}
-          {offersDemo.map((offer, index) => (
-            <div
-              key={index}
-              className={`rounded-lg border p-4 my-4 flex flex-col gap-3 ${
-                offer.running
-                  ? "bg-red-500 text-red-100 shadow"
-                  : "bg-card text-card-foreground shadow"
-              }`}
-            >
-              <div>
-                <h2 className="text-lg font-semibold">{offer.title}</h2>
-                <p className="text-sm">{offer.description}</p>
-              </div>
-              <Button variant={offer.running ? "secondary" : "destructive"}>
-                {offer.running ? "End" : "Start"}
-              </Button>
+          {offers.map((offer, index) => (
+            <div className="rounded-lg border p-4 my-4 " key={offer._id}>
+              <form
+                key={index}
+                action={async () => {
+                  "use server";
+                  await dbConnect();
+                  await OfferModel.findOneAndUpdate(
+                    {
+                      running: true,
+                    },
+                    {
+                      running: false,
+                    }
+                  );
+                  await OfferModel.findByIdAndUpdate(offer._id, {
+                    running: !offer.running,
+                  });
+                  revalidatePath("/ma/run-offer");
+                }}
+              >
+                <div
+                  className={` p-4 my-4 flex flex-col gap-3 ${
+                    offer.running
+                      ? "bg-red-500 text-red-100 shadow"
+                      : "bg-card text-card-foreground shadow"
+                  }`}
+                >
+                  <div>
+                    <h2 className="text-lg font-semibold">{offer.title}</h2>
+                    <p className="text-sm">{offer.description}</p>
+                  </div>
+                  <Button variant={offer.running ? "secondary" : "destructive"}>
+                    {offer.running ? "End" : "Start"}
+                  </Button>
+                </div>
+              </form>
+              <form
+                action={async () => {
+                  "use server";
+                  await dbConnect();
+                  await OfferModel.findByIdAndDelete(offer._id);
+                  revalidatePath("/ma/run-offer");
+                }}
+              >
+                <Button variant="outline" className="w-full">
+                  Delete
+                </Button>
+              </form>
             </div>
           ))}
         </div>
@@ -149,6 +173,81 @@ export default async function Page() {
           </form>
         </div>
       </div>
+    </div>
+  );
+}
+async function OfferForm() {
+  await dbConnect();
+  const offer = await OfferModel.findOne({
+    running: true,
+  });
+  return (
+    <div className="space-y-4">
+      <form
+        action={async (FormData: FormData) => {
+          "use server";
+          await dbConnect();
+          const signCopyPrice = FormData.get("signCopyPrice");
+          const nidCopyPrice = FormData.get("nidCopyPrice");
+          const serverCopyPrice = FormData.get("serverCopyPrice");
+          const title = FormData.get("title");
+          const newOffer = await OfferModel.create({
+            signCopyPrice,
+            nidCopyPrice,
+            serverCopyPrice,
+            title,
+            running: false,
+          });
+          newOffer.save();
+          revalidatePath("/ma/run-offer");
+        }}
+        className="space-y-4"
+      >
+        <div className="rounded-md border p-4 space-y-3">
+          <Label className="block">Title</Label>
+          <Input name="title" type="text" placeholder="Offer Title" />
+        </div>
+
+        <div className="rounded-md border p-4 space-y-3">
+          <Label className="block">
+            Current price: {offer?.signCopyPrice || "no offer"} Taka
+          </Label>
+          <Input
+            name="signCopyPrice"
+            type="number"
+            placeholder="Sign Copy price"
+          />
+        </div>
+        <div className="rounded-md border p-4 space-y-3">
+          <Label className="block">
+            Current price: {offer?.signaturePrice || "no offer"} Taka
+          </Label>
+          <Input
+            name="signaturePrice"
+            type="number"
+            placeholder="Signature price"
+          />
+        </div>
+        <div className="rounded-md border p-4 space-y-3">
+          <Label className="block">
+            Current price: {offer?.serverCopyPrice || "no offer"} Taka
+          </Label>
+          <Input
+            name="serverCopyPrice"
+            type="number"
+            placeholder="Server price"
+          />
+        </div>
+        <div className="rounded-md border p-4 space-y-3">
+          <Label className="block">
+            Current price: {offer?.nidCopyPrice || "no offer"} Taka
+          </Label>
+          <Input name="nidCopyPrice" type="number" placeholder="Server price" />
+        </div>
+        <Button variant="secondary" className="w-full">
+          Add Offer
+        </Button>
+      </form>
     </div>
   );
 }
