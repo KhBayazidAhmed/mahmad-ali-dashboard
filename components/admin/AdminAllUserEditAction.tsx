@@ -109,6 +109,15 @@ export function AdminAllUserEditActions({ user }: { user: UserProps }) {
                   </div>
                 </div>
               ))}
+              <div className="flex flex-col gap-3">
+                <Label htmlFor="name">Minimum Balance </Label>
+                <Input
+                  type="number"
+                  name="minimumBalance"
+                  placeholder="minimum balance"
+                  defaultValue={user?.minimumBalance}
+                />
+              </div>
             </CardContent>
           </Card>
           <DialogFooter>

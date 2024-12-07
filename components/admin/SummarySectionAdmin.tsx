@@ -72,17 +72,34 @@ function Loading() {
 async function TotalIncome() {
   await dbConnect();
 
-  const todayIncome = await TransitionModel.countDocuments({
-    createdAt: {
-      $gte: new Date(new Date().setHours(0, 0, 0, 0)), // Today's orders
+  // Calculate today's total income
+  const result = await TransitionModel.aggregate([
+    {
+      $match: {
+        type: "cashIn", // Filter only cashIn transactions
+        createdAt: {
+          $gte: new Date(new Date().setHours(0, 0, 0, 0)), // Start of today
+          $lte: new Date(new Date().setHours(23, 59, 59, 999)), // End of today
+        },
+      },
     },
-  });
+    {
+      $group: {
+        _id: null,
+        totalIncome: { $sum: "$amount" }, // Sum the `amount` field
+      },
+    },
+  ]);
+
+  const todayIncome = result[0]?.totalIncome || 0; // Default to 0 if no transactions
+
   return (
     <>
       Today Income: <span className="font-medium">{todayIncome}</span>
     </>
   );
 }
+
 async function TodayOrders() {
   await dbConnect();
 
