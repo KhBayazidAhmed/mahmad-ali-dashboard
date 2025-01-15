@@ -73,7 +73,7 @@ export async function createOrder(initial: unknown, formData: FormData) {
     revalidatePath(`/dashboard/${userId}`);
 
     return { success: true, message: "Order created successfully" };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.error(error.message);
     return { success: false, message: "Error creating order" };

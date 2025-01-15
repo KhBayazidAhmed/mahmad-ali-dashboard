@@ -8,17 +8,13 @@ const offerSchema = new mongoose.Schema(
     },
     signCopyPrice: {
       type: Number,
-      required: true,
     },
     nidCopyPrice: {
       type: Number,
-      required: true,
     },
     serverCopyPrice: {
       type: Number,
-      required: true,
     },
-
     running: {
       type: Boolean,
       required: true,

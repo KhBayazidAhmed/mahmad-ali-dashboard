@@ -3,9 +3,11 @@ import UserModel from "@/lib/db/models/User.Model";
 import { Suspense } from "react";
 import { FaDollarSign, FaAddressCard, FaBitcoin } from "react-icons/fa";
 import { Skeleton } from "../ui/skeleton";
+import dbConnect from "@/lib/db/connection";
 
 // Income Summary Component
 async function IncomeSummary({ userId }: { userId: string }) {
+  await dbConnect();
   const user = await UserModel.findById(userId);
   const totalBalance = user ? user.balance : 0;
   const todayOrders = await OrderModel.countDocuments({
@@ -33,6 +35,7 @@ async function IncomeSummary({ userId }: { userId: string }) {
 
 // Work Summary Component
 async function WorkSummary({ userId }: { userId: string }) {
+  await dbConnect();
   const todaySignCard = await OrderModel.countDocuments({
     user: userId,
     copyType: "sign_copy",
@@ -75,6 +78,7 @@ async function WorkSummary({ userId }: { userId: string }) {
 
 // Recharge Component
 async function RechargeSummary({ userId }: { userId: string }) {
+  await dbConnect();
   const user = await UserModel.findById(userId);
   const remainingBalance = user ? user.balance : 0;
   return (
@@ -121,7 +125,6 @@ function Loading() {
       <Skeleton className="h-6 w-1/3 mb-2" />
       <Skeleton className="h-4 w-1/2 mb-2" />
       <Skeleton className="h-4 w-1/2 mb-2" />
-
       <Skeleton className="h-4 w-1/2" />
     </div>
   );
