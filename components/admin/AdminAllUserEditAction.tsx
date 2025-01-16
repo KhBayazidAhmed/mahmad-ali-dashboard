@@ -87,7 +87,8 @@ export function AdminAllUserEditActions({ user }: { user: UserProps }) {
                   className="flex flex-col space-y-3 rounded-md border p-4 "
                 >
                   <Label className="flex items-center justify-between">
-                    Current price: {user?.[item.price as keyof UserProps]}
+                    Price of {item.name}:{" "}
+                    {user?.[item.price as keyof UserProps]}
                     Taka{" "}
                     <Switch
                       name={item.service}

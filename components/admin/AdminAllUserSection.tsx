@@ -15,18 +15,20 @@ import dbConnect from "@/lib/db/connection";
 // Cached function to fetch user data
 const userData = async () => {
   await dbConnect();
+
+  // Fetch data, excluding unnecessary fields
   const users = await UserModel.find(
     {},
     { password: 0, orders: 0, __v: 0 }
   ).lean();
-  // Map the data to ensure proper typing and transformations
+
+  // Ensure all fields are converted to plain objects
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return users.map((user: any) => ({
-    _id: user._id.toString(),
     ...user,
+    _id: user._id.toString(), // Convert _id to a string
   }));
 };
-
 export default async function AdminAllUserSection() {
   const users = await userData();
   return (
