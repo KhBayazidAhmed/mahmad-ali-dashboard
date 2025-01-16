@@ -16,6 +16,8 @@ import dbConnect from "@/lib/db/connection";
 import NoticeRunningFormSubmit from "@/components/admin/NoticeRunningFormSubmit";
 import NoticeDeleteSubmitButton from "@/components/admin/NoticeDeleteSubmitButton";
 import OfferModel from "@/lib/db/models/Offer.Model";
+import OfferAddingButton from "@/components/admin/OfferAddingButton";
+import OfferRunStartStopSubmitButton from "@/components/admin/OfferRunStartStopSubmitButton";
 
 type Notice = {
   _id: string;
@@ -80,9 +82,7 @@ export default async function Page() {
                     <h2 className="text-lg font-semibold">{offer.title}</h2>
                     <p className="text-sm">{offer.description}</p>
                   </div>
-                  <Button variant={offer.running ? "secondary" : "destructive"}>
-                    {offer.running ? "End" : "Start"}
-                  </Button>
+                  <OfferRunStartStopSubmitButton running={offer.running} />
                 </div>
               </form>
               <form
@@ -93,9 +93,7 @@ export default async function Page() {
                   revalidatePath("/ma/run-offer");
                 }}
               >
-                <Button variant="outline" className="w-full">
-                  Delete
-                </Button>
+                <NoticeDeleteSubmitButton />
               </form>
             </div>
           ))}
@@ -188,12 +186,10 @@ async function OfferForm() {
           "use server";
           await dbConnect();
           const signCopyPrice = FormData.get("signCopyPrice");
-          const nidCopyPrice = FormData.get("nidCopyPrice");
           const serverCopyPrice = FormData.get("serverCopyPrice");
           const title = FormData.get("title");
           const newOffer = await OfferModel.create({
             signCopyPrice,
-            nidCopyPrice,
             serverCopyPrice,
             title,
             running: false,
@@ -205,48 +201,35 @@ async function OfferForm() {
       >
         <div className="rounded-md border p-4 space-y-3">
           <Label className="block">Title</Label>
-          <Input name="title" type="text" placeholder="Offer Title" />
+          <Input name="title" type="text" required placeholder="Offer Title" />
         </div>
 
         <div className="rounded-md border p-4 space-y-3">
           <Label className="block">
-            Current price: {offer?.signCopyPrice || "no offer"} Taka
+            Current price Sign Copy : {offer?.signCopyPrice || "no offer"} Taka
           </Label>
           <Input
             name="signCopyPrice"
             type="number"
+            required
             placeholder="Sign Copy price"
           />
         </div>
+
         <div className="rounded-md border p-4 space-y-3">
           <Label className="block">
-            Current price: {offer?.signaturePrice || "no offer"} Taka
-          </Label>
-          <Input
-            name="signaturePrice"
-            type="number"
-            placeholder="Signature price"
-          />
-        </div>
-        <div className="rounded-md border p-4 space-y-3">
-          <Label className="block">
-            Current price: {offer?.serverCopyPrice || "no offer"} Taka
+            Current price Server Copy : {offer?.serverCopyPrice || "no offer"}{" "}
+            Taka
           </Label>
           <Input
             name="serverCopyPrice"
             type="number"
+            required
             placeholder="Server price"
           />
         </div>
-        <div className="rounded-md border p-4 space-y-3">
-          <Label className="block">
-            Current price: {offer?.nidCopyPrice || "no offer"} Taka
-          </Label>
-          <Input name="nidCopyPrice" type="number" placeholder="Server price" />
-        </div>
-        <Button variant="secondary" className="w-full">
-          Add Offer
-        </Button>
+
+        <OfferAddingButton name="Adding Offer" />
       </form>
     </div>
   );

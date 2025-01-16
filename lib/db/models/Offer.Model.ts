@@ -9,9 +9,7 @@ const offerSchema = new mongoose.Schema(
     signCopyPrice: {
       type: Number,
     },
-    nidCopyPrice: {
-      type: Number,
-    },
+
     serverCopyPrice: {
       type: Number,
     },

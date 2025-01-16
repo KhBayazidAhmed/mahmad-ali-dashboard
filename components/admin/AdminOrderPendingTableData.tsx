@@ -84,6 +84,16 @@ export default async function AdminOrderPendingTableData() {
             >
               <AdminPendingDataSubmitButton name={"Done"} />
             </form>
+            <form
+              action={async () => {
+                "use server";
+                await dbConnect();
+                await OrderModel.deleteOne({ _id: user._id.toString() });
+                revalidatePath("/ma");
+              }}
+            >
+              <AdminPendingDataSubmitButton name={"Delete"} />
+            </form>
           </TableCell>
         </TableRow>
       ))}
